@@ -4,53 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="02de8ade-bb16-4793-9c23-b22137d0db9a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../Collections/Collections.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Comparable/Comparable.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Comparator/Comparator.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../ComparatorLambda/ComparatorLambda.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../EmailJAVa/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../EmailJAVa/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../EmailJAVa/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../EmailJAVa/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../EmailJAVa/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../EmailJAVa/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../EmailJAVa/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../EmailJAVa/src/main/java/org/example/App.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../EmailJAVa/src/test/java/org/example/AppTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Exceptions/Exceptions.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../HashCode and Equals/HashCode and Equals.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../JUNIT234/JUNIT234.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../JavaBasic/JavaBasic.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lambda/Lambda.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lambda2/Lambda2.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Queue/Queue.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RepApp.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/index.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Set/Set.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../SpringStudyProject/SpringStudyProject.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Stack/Stack.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../apache-maven-3.9.5/.idea/apache-maven-3.9.5.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../jsp-servlet-jdbc-mysql-crud-tutorial-master12/jsp-servlet-jdbc-mysql-crud-tutorial-master12.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../test/test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../untitled/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../untitled/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../untitled/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../untitled/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../untitled/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../untitled/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../untitled/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../untitled/src/main/java/org/example/App.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../untitled/src/test/java/org/example/AppTest.java" afterDir="false" />
-    </list>
+    <list default="true" id="02de8ade-bb16-4793-9c23-b22137d0db9a" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -64,7 +18,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -123,7 +77,7 @@
       <option name="presentableId" value="Default" />
       <updated>1701760161057</updated>
       <workItem from="1701760162415" duration="4432000" />
-      <workItem from="1701765096033" duration="1323000" />
+      <workItem from="1701765096033" duration="1897000" />
     </task>
     <servers />
   </component>

@@ -20,7 +20,7 @@ public class MemberDAOImpl implements MemberDAO {
 
         session.beginTransaction();
 
-        List<Member> employees = session.createQuery("from Employee ").getResultList();
+        List<Member> employees = session.createQuery("from Member ").getResultList();
 
         session.getTransaction().commit();
         return employees;

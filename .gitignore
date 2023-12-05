@@ -1,0 +1,65 @@
+# IntelliJ IDEA
+.idea/
+
+# Compiled class files
+*.class
+
+# Compiled JAR files
+*.jar
+
+# Logs
+*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Maven
+target/
+
+# Gradle
+build/
+
+# Eclipse
+.settings/
+
+# User-specific files
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/datasources.xml
+
+# Javadoc
+/target/site/
+
+# Spring Boot
+*.iml
+.idea_modules/
+
+# IntelliJ-specific files
+*.iws
+*.ipr
+
+# Log files
+log/
+logs/
+*.log
+
+# Temporary files
+*.tmp
+*.swp
+*~
+
+# Package Files
+*.war
+*.ear
+*.zip
+*.tar.gz
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# MacOS files
+.DS_Store
