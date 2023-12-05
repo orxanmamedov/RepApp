@@ -1,5 +1,7 @@
 package com.green.service;
 
+import com.green.dao.ActivityDAO;
+import com.green.dao.ActivityDAOImpl;
 import com.green.dao.MemberDAO;
 import com.green.dao.MemberDAOImpl;
 import com.green.entity.Activity;
@@ -10,6 +12,7 @@ import java.util.List;
 public class ServiceImpl implements Service {
 
     private MemberDAO memberDAO = new MemberDAOImpl();
+    private ActivityDAO activityDAO = new ActivityDAOImpl();
 
     @Override
     public List<Member> getListOfMembers() {
@@ -33,21 +36,21 @@ public class ServiceImpl implements Service {
 
     @Override
     public List<Activity> getListOfActivity() {
-        return null;
+        return activityDAO.getListOfActivities();
     }
 
     @Override
     public void saveActivity(Activity activity) {
-
+        activityDAO.saveActivity(activity);
     }
 
     @Override
     public Activity getActivityById(int id) {
-        return null;
+        return activityDAO.getActivityById(id);
     }
 
     @Override
     public void deleteActivity(int id) {
-
+        activityDAO.deleteActivity(id);
     }
 }

@@ -18,15 +18,15 @@ public class ActivityDAOImpl implements ActivityDAO {
 
 
     @Override
-    public List<Member> getListOfActivities() {
+    public List<Activity> getListOfActivities() {
         Session session = factory.getCurrentSession();
 
         session.beginTransaction();
 
-        List<Member> employees = session.createQuery("from Activity ").getResultList();
+        List<Activity> activities = session.createQuery("from Activity ").getResultList();
 
         session.getTransaction().commit();
-        return employees;
+        return activities;
     }
 
     @Override
@@ -60,5 +60,5 @@ public class ActivityDAOImpl implements ActivityDAO {
 
         session.getTransaction().commit();
     }
-    
+
 }

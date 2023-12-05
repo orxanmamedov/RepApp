@@ -16,7 +16,7 @@ public class Activity {
     @Column(name = "subject")
     private String subject;
     @Column(name = "took_time")
-    private double took_time;
+    private double tookTime;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "member_id")
@@ -25,10 +25,10 @@ public class Activity {
     public Activity() {
     }
 
-    public Activity(LocalDate date, String subject, double took_time) {
+    public Activity(LocalDate date, String subject, double tookTime) {
         this.date = date;
         this.subject = subject;
-        this.took_time = took_time;
+        this.tookTime = tookTime;
     }
 
     public int getId() {
@@ -55,12 +55,12 @@ public class Activity {
         this.subject = subject;
     }
 
-    public double getTook_time() {
-        return took_time;
+    public double getTookTime() {
+        return tookTime;
     }
 
-    public void setTook_time(double took_time) {
-        this.took_time = took_time;
+    public void setTookTime(double took_time) {
+        this.tookTime = took_time;
     }
 
     public Member getMember() {
@@ -71,5 +71,14 @@ public class Activity {
         this.member = member;
     }
 
-
+    @Override
+    public String toString() {
+        return "Activity{" +
+                "id=" + id +
+                ", date=" + date +
+                ", subject='" + subject + '\'' +
+                ", tookTime=" + tookTime +
+                ", member=" + member +
+                '}';
+    }
 }

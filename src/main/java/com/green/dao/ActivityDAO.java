@@ -6,7 +6,7 @@ import com.green.entity.Member;
 import java.util.List;
 
 public interface ActivityDAO {
-    public List<Member> getListOfActivities();
+    public List<Activity> getListOfActivities();
     public void saveActivity(Activity activity);
     public Activity getActivityById(int id);
     public void deleteActivity(int id);
