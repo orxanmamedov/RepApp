@@ -22,11 +22,12 @@ public class OnceADayRunner {
         Calendar currentDate = Calendar.getInstance();
         Date now = currentDate.getTime();
         Timer timer = new Timer();
+        ReportBuilder reportBuilder = new ReportBuilder();
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
                 try {
-                    new GMailer().sendMail("sub", "msg");
+                    new GMailer().sendMail("sub", reportBuilder.report());
                 } catch (GeneralSecurityException e) {
                     throw new RuntimeException(e);
                 } catch (IOException e) {
@@ -39,8 +40,8 @@ public class OnceADayRunner {
         };
 
         Calendar scheduledTime = Calendar.getInstance();
-        scheduledTime.set(Calendar.HOUR_OF_DAY, 23);
-        scheduledTime.set(Calendar.MINUTE, 59);
+        scheduledTime.set(Calendar.HOUR_OF_DAY, 18);
+        scheduledTime.set(Calendar.MINUTE, 53);
         scheduledTime.set(Calendar.SECOND, 0);
         scheduledTime.set(Calendar.MILLISECOND, 0);
 

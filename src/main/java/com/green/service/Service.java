@@ -11,7 +11,7 @@ public interface Service {
     public void saveMember(Member member);
     public Member getMemberById(int id);
     public void deleteMember(int id);
-    public List<Activity> getListOfActivity();
+    public List<Activity> getListOfActivities();
     public void saveActivity(Activity activity);
     public Activity getActivityById(int id);
     public void deleteActivity(int id);

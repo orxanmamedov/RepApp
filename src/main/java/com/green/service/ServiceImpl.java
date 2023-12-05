@@ -35,7 +35,7 @@ public class ServiceImpl implements Service {
     }
 
     @Override
-    public List<Activity> getListOfActivity() {
+    public List<Activity> getListOfActivities() {
         return activityDAO.getListOfActivities();
     }
 

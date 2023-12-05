@@ -6,13 +6,17 @@ import com.green.dao.MemberDAO;
 import com.green.dao.MemberDAOImpl;
 import com.green.entity.Activity;
 import com.green.entity.Member;
+import com.green.service.Service;
+import com.green.service.ServiceImpl;
 import io.javalin.Javalin;
 
 import io.javalin.http.Context;
 import java.util.List;
 
 public class RestApi {
+     Service service = new ServiceImpl();
     public static void main(String[] args) {
+
 
         Javalin app = Javalin.create();
 
