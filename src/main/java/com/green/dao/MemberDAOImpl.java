@@ -2,6 +2,7 @@ package com.green.dao;
 
 import com.green.entity.Activity;
 import com.green.entity.Member;
+import org.checkerframework.checker.units.qual.A;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -55,17 +56,19 @@ public class MemberDAOImpl implements MemberDAO {
     public void deleteMember(int id) {
         Session session = factory.getCurrentSession();
         session.beginTransaction();
-
-        session.delete(session.get(Member.class, id));
+        Member member = session.get(Member.class, id);
+        session.delete(member);
 
         session.getTransaction().commit();
 
     }
 
+
+
 //    public static void main(String[] args) {
 //
 //        SessionFactory factory = new Configuration()
-//                .configure("hubernate.cfg.xml")
+//                .configure("hibernate.cfg.xml")
 //                .addAnnotatedClass(Member.class)
 //                .addAnnotatedClass(Activity.class)
 //                .buildSessionFactory();
