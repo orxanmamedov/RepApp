@@ -2,6 +2,7 @@ package com.green.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.green.entity.Activity;
 import com.green.entity.Member;
 import com.green.service.Service;
@@ -21,11 +22,20 @@ public class MyServlet extends HttpServlet {
     private static final String PATH_TO_MEMBER ="/members";
     private static final String PATH_TO_ACTIVITIES="/activities";
     private final Service service = new ServiceImpl();
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private ObjectMapper objectMapper = new ObjectMapper();
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+    }
+
+
     //Show data
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String pathInfo = req.getPathInfo();
+
+        String pathInfo = req.getServletPath();
         if (pathInfo.startsWith(PATH_TO_MEMBER)) {
             if (pathInfo.equals(PATH_TO_MEMBER)) {
                 List<Member> members = service.getListOfMembers();
@@ -57,7 +67,7 @@ public class MyServlet extends HttpServlet {
     //Insert data
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String pathInfo = req.getPathInfo();
+        String pathInfo = req.getServletPath();
         if (pathInfo.equals(PATH_TO_MEMBER)){
             Member member = objectMapper.readValue(req.getReader(), Member.class);
             service.saveMember(member);
@@ -68,10 +78,10 @@ public class MyServlet extends HttpServlet {
             resp.setStatus(HttpServletResponse.SC_CREATED);
         }
     }
-    //Update data
+//    Update data
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String pathInfo = req.getPathInfo();
+        String pathInfo = req.getServletPath();
 
         if (pathInfo.startsWith(PATH_TO_MEMBER)) {
             int memberId = extractIdFromPath(pathInfo);
@@ -102,7 +112,7 @@ public class MyServlet extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String pathInfo = req.getPathInfo();
+        String pathInfo = req.getServletPath();
 
         if (pathInfo.startsWith(PATH_TO_MEMBER)) {
             int memberId = extractIdFromPath(pathInfo);

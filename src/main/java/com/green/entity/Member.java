@@ -1,5 +1,6 @@
 package com.green.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.checkerframework.checker.units.qual.A;
 
 import javax.persistence.*;
@@ -18,7 +19,9 @@ public class Member {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "member")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "member",
+            fetch = FetchType.EAGER)
+    @JsonManagedReference
     private List<Activity> activities;
     public Member() {
     }

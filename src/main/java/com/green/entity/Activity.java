@@ -1,7 +1,11 @@
 package com.green.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Comparator;
+import java.util.TreeSet;
 
 
 @Entity
@@ -20,6 +24,7 @@ public class Activity {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "member_id")
+    @JsonBackReference
     private Member member;
 
     public Activity() {
@@ -79,6 +84,7 @@ public class Activity {
                 ", subject='" + subject + '\'' +
                 ", tookTime=" + tookTime +
                 ", member=" + member +
+
                 '}';
     }
 }
