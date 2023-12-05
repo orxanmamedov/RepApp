@@ -1,38 +1,39 @@
 package com.green.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.checkerframework.checker.units.qual.A;
+
+import javax.persistence.*;
 import java.sql.Date;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "members")
 public class Member {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    int id;
+    private int id;
     @Column(name = "name")
-    String name;
-    @Column(name = "date")
-    Date date;
-    @Column(name = "subject")
-    String subject;
-    @Column(name = "took_time")
-    double took_time;
+    private String name;
 
-    public Member(String name, Date date, String subject, double took_time) {
-        this.name = name;
-        this.date = date;
-        this.subject = subject;
-        this.took_time = took_time;
-    }
-
-
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "member")
+    private List<Activity> activities;
     public Member() {
     }
+    public void addActivityToMember(Activity activity){
+        if(this.activities == null){
+            activities = new ArrayList<>();
+        }
+        activities.add(activity);
+        activity.setMember(this);
 
+    }
+
+    public Member(String name) {
+        this.name = name;
+    }
     public int getId() {
         return id;
     }
@@ -49,28 +50,12 @@ public class Member {
         this.name = name;
     }
 
-    public Date getDate() {
-        return date;
+    public List<Activity> getActivities() {
+        return activities;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
-    public double getTook_time() {
-        return took_time;
-    }
-
-    public void setTook_time(double took_time) {
-        this.took_time = took_time;
+    public void setActivities(List<Activity> activities) {
+        this.activities = activities;
     }
 
     @Override
@@ -78,9 +63,6 @@ public class Member {
         return "Member{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", date=" + date +
-                ", subject='" + subject + '\'' +
-                ", took_time=" + took_time +
                 '}';
     }
 }
