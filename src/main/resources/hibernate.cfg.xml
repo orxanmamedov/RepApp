@@ -7,19 +7,12 @@
         <property name="connection.url">jdbc:mysql://34.123.61.209:3306/project?useSSL=false&amp;serverTimezone=UTC</property>
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <property name="connection.username">root</property>
-        <property name="connection.password">1234Project!</property>
+        <property name="connection.password">1234</property>
 
         <property name="current_session_context_class">thread</property>
         <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="show_sql">true</property>
         <property name="hibernate.jdbc.time_zone">UTC</property>
-
-
-
-
-
-
-
 
     </session-factory>
 </hibernate-configuration>
