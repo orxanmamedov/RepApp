@@ -2,10 +2,18 @@ package com.green.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.Table;
 import java.time.LocalDate;
-import java.util.Comparator;
-import java.util.TreeSet;
+
 
 
 @Entity
@@ -66,8 +74,8 @@ public class Activity {
         return tookTime;
     }
 
-    public void setTookTime(double took_time) {
-        this.tookTime = took_time;
+    public void setTookTime(double tookTime) {
+        this.tookTime = tookTime;
     }
 
     public Member getMember() {

@@ -2,17 +2,17 @@ package com.green.dao;
 
 import com.green.entity.Activity;
 import com.green.entity.Member;
+import com.green.exception.CustomApplicationException;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class ActivityDAOImpl implements ActivityDAO {
 
-    private SessionFactory factory = new Configuration()
+    private final SessionFactory factory = new Configuration()
             .configure("hibernate.cfg.xml")
             .addAnnotatedClass(Member.class)
             .addAnnotatedClass(Activity.class)
@@ -21,46 +21,48 @@ public class ActivityDAOImpl implements ActivityDAO {
 
     @Override
     public List<Activity> getListOfActivities() {
-        Session session = factory.getCurrentSession();
-
-        session.beginTransaction();
-
-        List<Activity> activities = session.createQuery("from Activity ").getResultList();
-
-        session.getTransaction().commit();
-        return activities;
+        try (Session session = factory.getCurrentSession()) {
+            session.beginTransaction();
+            List<Activity> activities = session.createQuery("from Activity",Activity.class).getResultList();
+            session.getTransaction().commit();
+            return activities;
+        } catch (HibernateException e) {
+            throw new CustomApplicationException("Error retrieving list of activities", e);
+        }
     }
 
     @Override
     public void saveActivity(Activity activity) {
-        Session session = factory.getCurrentSession();
-        session.beginTransaction();
-
-        session.saveOrUpdate(activity);
-
-        session.getTransaction().commit();
+        try (Session session = factory.getCurrentSession()) {
+            session.beginTransaction();
+            session.saveOrUpdate(activity);
+            session.getTransaction().commit();
+        } catch (HibernateException e) {
+            throw new CustomApplicationException("Error saving/updating activity", e);
+        }
     }
 
     @Override
     public Activity getActivityById(int id) {
-        Session session = factory.getCurrentSession();
-        session.beginTransaction();
-
-        Activity activity =  session.get(Activity.class, id);
-
-        session.getTransaction().commit();
-        return activity;
+        try (Session session = factory.getCurrentSession()) {
+            session.beginTransaction();
+            Activity activity = session.get(Activity.class, id);
+            session.getTransaction().commit();
+            return activity;
+        } catch (HibernateException e) {
+            throw new CustomApplicationException("Error retrieving activity by ID", e);
+        }
     }
 
     @Override
     public void deleteActivity(int id) {
-        Session session = factory.getCurrentSession();
-        session.beginTransaction();
-
-        Activity activity = session.get(Activity.class, id);
-        session.delete(activity);
-
-        session.getTransaction().commit();
+        try (Session session = factory.getCurrentSession()) {
+            session.beginTransaction();
+            Activity activity = session.get(Activity.class, id);
+            session.delete(activity);
+            session.getTransaction().commit();
+        } catch (HibernateException e) {
+            throw new CustomApplicationException("Error deleting activity", e);
+        }
     }
-
 }
