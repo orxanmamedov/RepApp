@@ -98,12 +98,5 @@ public class GMailer {
         }
     }
 
-//    public static void main(String[] args) throws GeneralSecurityException, IOException, MessagingException {
-//
-//
-//
-//        new GMailer().sendMail("A sddddd", "WORKS");
-//    }
-
 
 }

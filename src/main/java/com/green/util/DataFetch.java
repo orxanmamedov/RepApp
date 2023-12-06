@@ -16,7 +16,7 @@ import java.util.Map;
 public class DataFetch {
 
     public static Map<Member, List<Activity>> takeFromDb(){
-        String hql = "SELECT m, a FROM Member m JOIN m.activities a ORDER BY m.name";
+        String hql = "SELECT m, a FROM Member m JOIN m.activities a";
         SessionFactory factory = new Configuration()
                 .configure("hibernate.cfg.xml")
                 .addAnnotatedClass(Member.class)

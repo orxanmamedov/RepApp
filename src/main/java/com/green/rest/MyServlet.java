@@ -7,6 +7,7 @@ import com.green.entity.Activity;
 import com.green.entity.Member;
 import com.green.service.Service;
 import com.green.service.ServiceImpl;
+import com.green.util.TaskRunner;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.ServletException;
@@ -28,6 +29,8 @@ public class MyServlet extends HttpServlet {
         super.init();
         objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
+        TaskRunner taskRunner = new TaskRunner();
+        taskRunner.runTheTaskAtScheduledTime(23, 59, 0);
     }
 
 
