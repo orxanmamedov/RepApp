@@ -13,15 +13,15 @@ public class ReportBuilder {
         StringBuilder output = new StringBuilder();
         // Iterate over the map entries
         for (Map.Entry<Member, List<Activity>> entry : map.entrySet()) {
-            Member key = entry.getKey(); // Get the key (String)
-            List<Activity> value = entry.getValue(); // Get the value (List<Activity>)
+            Member key = entry.getKey();
+            List<Activity> value = entry.getValue();
 
-            // Process key and value as needed
+
             output.append("Member: ").append(key.getName()).append("\n");
 
-            // Iterate over the List<Activity>
+
             for (Activity activity : value) {
-                // Process each activity in the list
+
                 output.append("  Subject: ").append(activity.getSubject())
                         .append(", Took Time: ").append(activity.getTookTime()).append("h")
                         .append("\n");

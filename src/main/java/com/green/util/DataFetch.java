@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.Map;
 
 public class DataFetch {
+    private DataFetch() {
+    }
 
     public static Map<Member, List<Activity>> takeFromDb(){
         String hql = "SELECT m, a FROM Member m JOIN m.activities a";
