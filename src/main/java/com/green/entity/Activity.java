@@ -29,9 +29,11 @@ public class Activity {
 
     public Activity() {
     }
-
-    public Activity(LocalDate date, String subject, double tookTime) {
-        this.date = date;
+    @PrePersist
+    public void prePersist(){
+        this.date = LocalDate.now();
+    }
+    public Activity(String subject, double tookTime) {
         this.subject = subject;
         this.tookTime = tookTime;
     }

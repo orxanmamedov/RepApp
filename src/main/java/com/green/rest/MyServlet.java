@@ -74,6 +74,8 @@ public class MyServlet extends HttpServlet {
             resp.setStatus(HttpServletResponse.SC_CREATED);
         } else if (pathInfo.equals(PATH_TO_ACTIVITIES)) {
             Activity activity = objectMapper.readValue(req.getReader(), Activity.class);
+            Member member = service.getMemberById(activity.getMember().getId());
+            activity.setMember(member);
             service.saveActivity(activity);
             resp.setStatus(HttpServletResponse.SC_CREATED);
         }
