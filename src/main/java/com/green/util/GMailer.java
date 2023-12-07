@@ -51,8 +51,7 @@ public class GMailer {
         // Build flow and trigger user authorization request.
         GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
                 httpTransport, GsonFactory.getDefaultInstance(), clientSecrets, Set.of(GmailScopes.GMAIL_SEND))
-                .setDataStoreFactory(new FileDataStoreFactory(Paths.get("classpath:/tokens").toFile()))
-
+                .setDataStoreFactory(new FileDataStoreFactory(Paths.get("tokens").toFile()))
                 .setAccessType("offline")
                 .build();
         LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(8888).build();
