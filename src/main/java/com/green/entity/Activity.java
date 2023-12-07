@@ -30,7 +30,7 @@ public class Activity {
     @Column(name = "took_time")
     private double tookTime;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "member_id")
     @JsonBackReference
     private Member member;
