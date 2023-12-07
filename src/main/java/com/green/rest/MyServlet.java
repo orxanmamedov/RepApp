@@ -29,12 +29,10 @@ public class MyServlet extends HttpServlet {
         super.init();
         objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
-        TaskRunner taskRunner = new TaskRunner();
-        taskRunner.runTheTaskAtScheduledTime(18, 35, 0);
     }
 
 
-    
+
     //Show data
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
