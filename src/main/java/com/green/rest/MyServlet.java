@@ -30,7 +30,7 @@ public class MyServlet extends HttpServlet {
         objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
         TaskRunner taskRunner = new TaskRunner();
-        taskRunner.runTheTaskAtScheduledTime(12, 50, 0);
+        taskRunner.runTheTaskAtScheduledTime(18, 35, 0);
     }
 
 
