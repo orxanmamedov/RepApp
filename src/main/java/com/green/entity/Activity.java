@@ -37,10 +37,10 @@ public class Activity {
 
     public Activity() {
     }
-    @PrePersist
-    public void prePersist(){
-        this.date = LocalDate.now();
-    }
+//    @PrePersist
+//    public void prePersist(){
+//        this.date = LocalDate.now();
+//    }
     public Activity(String subject, double tookTime) {
         this.subject = subject;
         this.tookTime = tookTime;

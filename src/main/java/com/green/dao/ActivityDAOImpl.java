@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class ActivityDAOImpl implements ActivityDAO {
@@ -35,6 +36,7 @@ public class ActivityDAOImpl implements ActivityDAO {
     public void saveActivity(Activity activity) {
         try (Session session = factory.getCurrentSession()) {
             session.beginTransaction();
+            activity.setDate(LocalDate.now());
             session.saveOrUpdate(activity);
             session.getTransaction().commit();
         } catch (HibernateException e) {
