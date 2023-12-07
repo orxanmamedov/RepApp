@@ -14,6 +14,6 @@ public class TaskRunner{
 
     public void runTheTaskAtScheduledTime(int hour, int minute, int second){
         timer.schedule(taskToRun.getTask(), calculateInitialDelay(hour, minute, second), 86400000);
-        System.out.println(calculateInitialDelay(hour, minute, second));
+        System.out.println("SCHEDULED TIME ----------" + calculateInitialDelay(hour, minute, second));
     }
 }
