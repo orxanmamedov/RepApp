@@ -34,6 +34,7 @@ public class MyServlet extends HttpServlet {
     }
 
 
+    
     //Show data
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
