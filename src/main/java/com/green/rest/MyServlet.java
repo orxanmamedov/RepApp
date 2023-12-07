@@ -29,6 +29,8 @@ public class MyServlet extends HttpServlet {
         super.init();
         objectMapper = new ObjectMapper();
         objectMapper.registerModule(new JavaTimeModule());
+        TaskRunner taskRunner = new TaskRunner();
+        taskRunner.runTheTaskAtScheduledTime(14, 50, 0);
     }
 
 
