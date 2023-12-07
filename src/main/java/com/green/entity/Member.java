@@ -23,8 +23,7 @@ public class Member {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "member",
-            fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "member", fetch = FetchType.EAGER, orphanRemoval = true)
     @JsonManagedReference
     private List<Activity> activities;
     public Member() {
