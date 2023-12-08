@@ -23,6 +23,7 @@ public class JavaMailer {
         final Properties properties = new Properties();
         try {
             properties.load(JavaMailer.class.getClassLoader().getResourceAsStream("mail.properties"));
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
