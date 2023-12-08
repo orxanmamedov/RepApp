@@ -12,8 +12,8 @@
 //    private TaskToRun taskToRun = new TaskToRun();
 //    private Timer timer = new Timer();
 //
-//    public void runTheTaskAtScheduledTime(int hour, int minute, int second){
-//        timer.schedule(taskToRun.getTask(), calculateInitialDelay(hour, minute, second), 86400000);
-//        System.out.println("SCHEDULED TIME ----------" + calculateInitialDelay(hour, minute, second));
-//    }
+////    public void runTheTaskAtScheduledTime(int hour, int minute, int second){
+////        timer.schedule(taskToRun.getTask(), calculateInitialDelay(hour, minute, second), 86400000);
+////        System.out.println("SCHEDULED TIME ----------" + calculateInitialDelay(hour, minute, second));
+////    }
 //}

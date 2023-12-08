@@ -2,30 +2,35 @@ package com.green.util;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
-import java.security.GeneralSecurityException;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
+import static com.green.util.Scheduler.calculateInitialDelay;
 
 public class TaskToRun {
-    private Timer timer = new Timer();
+    private static final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
     private ReportBuilder reportBuilder = new ReportBuilder();
-    private TimerTask task = new TimerTask() {
-        @Override
-        public void run() {
-            try {
-                new GMailer().sendMail("sub", reportBuilder.report());
-            } catch (GeneralSecurityException e) {
-                throw new RuntimeException(e);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            } catch (MessagingException e) {
-                throw new RuntimeException(e);
-            }
+    private JavaMailer javaMailer = new JavaMailer();
 
+    private Runnable task = () -> {
+        try {
+            javaMailer.sendMail("Daily Report", reportBuilder.report());
+        } catch (Exception e) {
+            // Handle exceptions gracefully
+            e.printStackTrace(); // Log the exception or perform appropriate logging
         }
     };
 
-    public TimerTask getTask(){
-        return task;
+    public static void scheduleTask(long initialDelay, long period, TimeUnit unit) {
+        scheduler.scheduleAtFixedRate(new TaskToRun().task, initialDelay, period, unit);
+    }
+    public void runTheTaskAtScheduledTime(int hour, int minute, int second){
+        scheduleTask(calculateInitialDelay(hour, minute, second), 86400000, TimeUnit.MILLISECONDS);
+        System.out.println("SCHEDULED TIME ----------" + calculateInitialDelay(hour, minute, second));
+    }
+
+    public static void shutdownScheduler() {
+        scheduler.shutdown();
     }
 }

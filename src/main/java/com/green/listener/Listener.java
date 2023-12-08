@@ -1,6 +1,7 @@
 package com.green.listener;
 
 
+import com.green.util.TaskToRun;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -12,8 +13,8 @@ public class Listener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         // This method will be called when the servlet context is initialized
-//        TaskRunner taskRunner = new TaskRunner();
-//        taskRunner.runTheTaskAtScheduledTime(15, 37, 0);
+        TaskToRun taskToRun = new TaskToRun();
+        taskToRun.runTheTaskAtScheduledTime(11, 17, 0);
     }
 
 

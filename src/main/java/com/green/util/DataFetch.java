@@ -1,6 +1,5 @@
 package com.green.util;
 
-
 import com.green.entity.Activity;
 import com.green.entity.Member;
 import org.hibernate.Session;
@@ -14,10 +13,9 @@ import java.util.List;
 import java.util.Map;
 
 public class DataFetch {
-    private DataFetch() {
-    }
 
-    public static Map<Member, List<Activity>> takeFromDb(){
+
+    public Map<Member, List<Activity>> takeFromDb() {
         String hql = "SELECT m, a FROM Member m JOIN m.activities a";
         SessionFactory factory = new Configuration()
                 .configure("hibernate.cfg.xml")
@@ -27,32 +25,34 @@ public class DataFetch {
 
         Session session = factory.getCurrentSession();
 
-        session.beginTransaction();
+        try {
+            session.beginTransaction();
 
-        Query<Object[]> query = session.createQuery(hql, Object[].class);
-        List<Object[]> results = query.getResultList();
+            Query<Object[]> query = session.createQuery(hql, Object[].class);
+            List<Object[]> results = query.getResultList();
 
-        session.getTransaction().commit();
+            session.getTransaction().commit();
 
-        Map<Member, List<Activity>> output = new HashMap<>();
+            Map<Member, List<Activity>> output = new HashMap<>();
 
-        for (Object[] result : results) {
-            Member member = (Member) result[0];
-            Activity activity = (Activity) result[1];
-            if (output.containsKey(member)) {
+            for (Object[] result : results) {
+                Member member = (Member) result[0];
+                Activity activity = (Activity) result[1];
+                output.computeIfAbsent(member, k -> new ArrayList<>()).add(activity);
+            }
 
-                output.get(member).add(activity);
-            }else {
-
-                List<Activity> activities = new ArrayList<>();
-                activities.add(activity);
-                output.put(member, activities);
+            return output;
+        } catch (Exception e) {
+            // Handle exceptions as needed
+            throw new RuntimeException(e);
+        } finally {
+            // Ensure that resources are closed, even if an exception occurs
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+            if (factory != null && !factory.isClosed()) {
+                factory.close();
             }
         }
-
-        return output;
     }
-
 }
-
-

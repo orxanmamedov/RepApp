@@ -9,7 +9,8 @@ import java.util.Map;
 public class ReportBuilder {
 
     public String report(){
-        Map<Member, List<Activity>> map = DataFetch.takeFromDb();
+        DataFetch dataFetch = new DataFetch();
+        Map<Member, List<Activity>> map = dataFetch.takeFromDb();
         StringBuilder output = new StringBuilder();
         // Iterate over the map entries
         for (Map.Entry<Member, List<Activity>> entry : map.entrySet()) {
