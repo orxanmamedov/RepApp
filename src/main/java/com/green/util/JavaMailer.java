@@ -44,7 +44,7 @@ public class JavaMailer {
             try {
                 tr.connect(null, "lrul llas ztnd ract");
                 tr.sendMessage(message, message.getAllRecipients());
-                System.out.println("MESSEGE WAS SENT SUCCESFULLY AT " + LocalTime.now());
+                System.out.println("MESSAGE WAS SENT SUCCESSFULLY AT " + LocalTime.now());
             } catch (MessagingException e) {
                 throw new RuntimeException(e);
             } finally {
