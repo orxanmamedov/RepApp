@@ -27,7 +27,7 @@ public class TaskToRun {
     }
     public void runTheTaskAtScheduledTime(int hour, int minute, int second){
         scheduleTask(calculateInitialDelay(hour, minute, second), 86400000, TimeUnit.MILLISECONDS);
-        System.out.println("SCHEDULED TIME ----------" + calculateInitialDelay(hour, minute, second));
+        System.out.println("SCHEDULED TIME ---------- " + calculateInitialDelay(hour, minute, second)/(60*60*1000) + " Hours");
     }
 
     public static void shutdownScheduler() {
