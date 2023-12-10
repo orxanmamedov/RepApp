@@ -42,10 +42,8 @@ public class DataFetch {
 
             return output;
         } catch (Exception e) {
-            // Handle exceptions as needed
             throw new RuntimeException(e);
         } finally {
-            // Ensure that resources are closed, even if an exception occurs
             if (session != null && session.isOpen()) {
                 session.close();
             }

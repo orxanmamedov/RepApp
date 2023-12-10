@@ -17,9 +17,6 @@ public class JavaMailer {
         final String emailFrom = "javagreengroupandersen";
         final String emailTo = "orxanaxbeats@gmail.com";
 
-        final String subject = sub;
-        final String messageText = mes;
-
         final Properties properties = new Properties();
         try {
             properties.load(JavaMailer.class.getClassLoader().getResourceAsStream("mail.properties"));
@@ -33,8 +30,8 @@ public class JavaMailer {
         try {
             message.setFrom(new InternetAddress(emailFrom));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(emailTo));
-            message.setSubject(subject);
-            message.setText(messageText);
+            message.setSubject(sub);
+            message.setText(mes);
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
@@ -51,7 +48,7 @@ public class JavaMailer {
                 try {
                     tr.close();
                 } catch (MessagingException e) {
-                    throw new RuntimeException(e);
+                    System.out.println(e);
                 }
             }
         } catch (NoSuchProviderException e) {

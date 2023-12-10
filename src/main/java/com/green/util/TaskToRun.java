@@ -10,14 +10,15 @@ import static com.green.util.Scheduler.calculateInitialDelay;
 
 public class TaskToRun {
     private static final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
-    private ReportBuilder reportBuilder = new ReportBuilder();
-    private JavaMailer javaMailer = new JavaMailer();
+    private final ReportBuilder reportBuilder = new ReportBuilder();
+    private final JavaMailer javaMailer = new JavaMailer();
 
-    private Runnable task = () -> {
+    private final Runnable task = () -> {
         try {
             javaMailer.sendMail("Daily Report", reportBuilder.report());
         } catch (Exception e) {
             // Handle exceptions gracefully
+            System.out.println("SOMETHING WRONG");
             e.printStackTrace(); // Log the exception or perform appropriate logging
         }
     };
