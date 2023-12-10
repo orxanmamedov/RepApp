@@ -18,7 +18,7 @@ public class TaskToRun {
             javaMailer.sendMail("Daily Report", reportBuilder.report());
         } catch (Exception e) {
             // Handle exceptions gracefully
-            System.out.println("SOMETHING WRONG");
+            System.out.println("SOMETHING WRONGGG");
             e.printStackTrace(); // Log the exception or perform appropriate logging
         }
     };
