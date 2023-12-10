@@ -14,46 +14,38 @@ import java.util.Properties;
 public class JavaMailer {
 
     public void sendMail(String sub, String mes) {
-        final String emailFrom = "javagreengroupandersen";
-        final String emailTo = "orxanaxbeats@gmail.com";
+        final String emailFrom = "javagreengroupandersen@gmail.com";
+        String emailTo = "orxanaxbeats@gmail.com";
+        String host = "smtp.gmail.com";
+        String smtpPort = "465";
 
         final Properties properties = new Properties();
-        try {
-            properties.load(JavaMailer.class.getClassLoader().getResourceAsStream("mail.properties"));
+        properties.put("mail.smtp.host", host);
+        properties.put("mail.smtp.port", smtpPort);
+        properties.put("mail.smtp.ssl.enable", "true");
+        properties.put("mail.smtp.auth", "true");
 
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        Session mailSession = Session.getInstance(properties,
+                new Authenticator() {
+                    @Override
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(emailFrom, "lrul llas ztnd ract");
+                    }
+                });
 
-        Session mailSession = Session.getDefaultInstance(properties);
-        MimeMessage message = new MimeMessage(mailSession);
+
+        mailSession.setDebug(true);
         try {
+            MimeMessage message = new MimeMessage(mailSession);
             message.setFrom(new InternetAddress(emailFrom));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(emailTo));
             message.setSubject(sub);
             message.setText(mes);
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
+            Transport.send(message);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        try {
-            Transport tr = mailSession.getTransport();
-            try {
-                tr.connect(null, "lrul llas ztnd ract");
-                tr.sendMessage(message, message.getAllRecipients());
-                System.out.println("MESSAGE WAS SENT SUCCESSFULLY AT " + LocalTime.now());
-            } catch (MessagingException e) {
-                throw new RuntimeException(e);
-            } finally {
-                try {
-                    tr.close();
-                } catch (MessagingException e) {
-                    System.out.println(e);
-                }
-            }
-        } catch (NoSuchProviderException e) {
-            throw new RuntimeException(e);
-        }
 
 
     }

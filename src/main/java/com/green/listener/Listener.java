@@ -14,7 +14,7 @@ public class Listener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         // This method will be called when the servlet context is initialized
         TaskToRun taskToRun = new TaskToRun();
-        taskToRun.runTheTaskAtScheduledTime(11, 15, 0);
+        taskToRun.runTheTaskAtScheduledTime(11, 37, 0);
     }
 
 
@@ -22,5 +22,6 @@ public class Listener implements ServletContextListener {
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
         // This method will be called when the servlet context is destroyed
         // You can perform cleanup tasks here if needed
+
     }
 }
