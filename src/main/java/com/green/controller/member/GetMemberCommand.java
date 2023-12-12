@@ -26,10 +26,6 @@ public class GetMemberCommand implements Command {
         this.objectMapper.registerModule(new JavaTimeModule());
     }
 
-    /*  /members - returns list of members
-        /members?nameGroup=green- returns members from the "green" group.
-        /members?id=1 - returns member with id=1.
-     */
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IOException {
 
