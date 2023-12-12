@@ -6,14 +6,15 @@ import com.green.dto.activity.ActivityRequestDTO;
 import com.green.dto.activity.ActivityResponseDTO;
 
 import java.util.List;
+import java.util.Map;
 
 
 public class ActivityServiceImpl implements ActivityService {
     private final ActivityDAO activityDAO = new ActivityDAOImpl();
 
     @Override
-    public List<ActivityResponseDTO> getListOfActivities() {
-        return activityDAO.getListOfActivities();
+    public List<ActivityResponseDTO> getListOfActivities(Map<String,String[]> parameterMap) {
+        return activityDAO.getListOfActivities(parameterMap);
     }
 
     @Override

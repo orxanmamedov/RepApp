@@ -13,10 +13,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class MemberDAOImpl implements MemberDAO {
@@ -25,35 +22,29 @@ public class MemberDAOImpl implements MemberDAO {
     @Override
     public List<MemberResponseDTO> getListOfMembers(Map<String, String[]> parameterMap) {
         Map<String, Object> params = extractParams(parameterMap);
-        StringBuilder queryString = new StringBuilder("from Member m ");
+        StringBuilder queryString = new StringBuilder("SELECT m FROM Member m");
         if (!params.isEmpty()) {
-            queryString.append(" WHERE");
-            boolean isFirst = true;
+            queryString.append(" WHERE ");
+            List<String> conditions = new ArrayList<>();
             for (Map.Entry<String, Object> param : params.entrySet()) {
-                if (!isFirst) {
-                    queryString.append(" AND");
-                }
                 switch (param.getKey()) {
                     case "id":
-                        queryString.append(" m.id = :id");
-                        int id = Integer.parseInt((String) param.getValue());
-                        params.put("id", id);
+                        conditions.add("m.id = :id");
+                        params.put("id", Integer.parseInt((String) param.getValue()));
                         break;
                     case "groupId":
-                        queryString.append(" m.group.id = :groupId");
-                        int groupId = Integer.parseInt((String) param.getValue());
-                        params.put("groupId", groupId);
+                        conditions.add("m.group.id = :groupId");
+                        params.put("groupId", Integer.parseInt((String) param.getValue()));
                         break;
                     case "groupName":
-                        queryString.append(" m.group.name = :groupName");
+                        conditions.add("m.group.name = :groupName");
                         params.put("groupName", param.getValue());
                         break;
                 }
-                isFirst = false;
             }
+            queryString.append(String.join(" AND ", conditions));
         }
         queryString.append(" ORDER BY m.id ASC");
-
 
 
         try (Session session = factory.getCurrentSession()) {
