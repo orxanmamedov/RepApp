@@ -3,19 +3,27 @@ package com.green.util;
 
 
 
+
+import javax.activation.DataHandler;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Properties;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
 
 public class JavaMailer {
 
-    public void sendMail(String sub, String mes) {
+    public void sendMail(String subject, String text, String filePath) {
         final String emailFrom = "javagreengroupandersen@gmail.com";
-        String emailTo = "orxanaxbeats@gmail.com";
+        String emailTo = "donlancaster228@gmail.com";
         String host = "smtp.gmail.com";
         String smtpPort = "465";
 
@@ -33,14 +41,23 @@ public class JavaMailer {
                     }
                 });
 
-
-        mailSession.setDebug(true);
+        mailSession.setDebug(false);
         try {
             MimeMessage message = new MimeMessage(mailSession);
             message.setFrom(new InternetAddress(emailFrom));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(emailTo));
-            message.setSubject(sub);
-            message.setText(mes);
+            message.setSubject(subject);
+            BodyPart messageBodyPart = new MimeBodyPart();
+            messageBodyPart.setText(text);
+            Multipart multipart = new MimeMultipart();
+            multipart.addBodyPart(messageBodyPart);
+            messageBodyPart = new MimeBodyPart();
+            DataSource source = new FileDataSource(filePath);
+            messageBodyPart.setDataHandler(new DataHandler(source));
+            messageBodyPart.setFileName("Green team time report.xlsx");
+            multipart.addBodyPart(messageBodyPart);
+            message.setContent(multipart);
+
             Transport.send(message);
         } catch (Exception e) {
             e.printStackTrace();

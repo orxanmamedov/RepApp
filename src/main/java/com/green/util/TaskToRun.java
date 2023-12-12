@@ -1,7 +1,7 @@
 package com.green.util;
 
-import javax.mail.MessagingException;
-import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -15,7 +15,9 @@ public class TaskToRun {
 
     private final Runnable task = () -> {
         try {
-            javaMailer.sendMail("Daily Report", reportBuilder.report());
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate today = LocalDate.now();
+            javaMailer.sendMail("Daily Report", "Hello!",  reportBuilder.generateReportFile(today));
         } catch (Exception e) {
             // Handle exceptions gracefully
             System.out.println("SOMETHING WRONGGG");
