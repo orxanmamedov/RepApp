@@ -45,14 +45,4 @@ public class PutActivityCommand implements Command {
     }
 
 
-//    private void handleUpdateActivity(HttpServletRequest request, HttpServletResponse response, int activityId)
-//            throws IOException {
-//        ActivityRequestDTO updatedActivity = objectMapper.readValue(request.getReader(), ActivityRequestDTO.class);
-//
-//        updatedActivity.setId(activityId);
-//        service.saveActivity(updatedActivity);
-//        response.setStatus(HttpServletResponse.SC_OK);
-//    }
-
-
 }
