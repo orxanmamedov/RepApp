@@ -1,9 +1,13 @@
 package com.green.util;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class test {
     public static void main(String[] args) {
-        ReportBuilder reportBuilder = new ReportBuilder();
         JavaMailer javaMailer = new JavaMailer();
-        javaMailer.sendMail("Daily Report", reportBuilder.report());
+
+        javaMailer.sendMail("Daily Report", "");
+
     }
 }

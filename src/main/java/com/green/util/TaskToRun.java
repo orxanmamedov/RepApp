@@ -1,7 +1,7 @@
 package com.green.util;
 
-import javax.mail.MessagingException;
-import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -10,12 +10,13 @@ import static com.green.util.Scheduler.calculateInitialDelay;
 
 public class TaskToRun {
     private static final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
-    private final ReportBuilder reportBuilder = new ReportBuilder();
     private final JavaMailer javaMailer = new JavaMailer();
 
     private final Runnable task = () -> {
         try {
-            javaMailer.sendMail("Daily Report", reportBuilder.report());
+
+            javaMailer.sendMail("Daily Report", "");
+
         } catch (Exception e) {
             // Handle exceptions gracefully
             System.out.println("SOMETHING WRONGGG");

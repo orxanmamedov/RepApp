@@ -23,6 +23,7 @@ public class MemberCommandDispatcher {
 
     public Command getCommand(String name) {
         Command command = commands.get(name);
+        //TODO use lambda
         if (command == null) {
             throw new IllegalArgumentException("Unknown command: " + name);
         }
