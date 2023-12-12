@@ -4,10 +4,15 @@ package com.green.dto.activity;
 import java.time.LocalDate;
 
 public class ActivityRequestDTO {
+    private int id;
     private LocalDate date;
     private String subject;
     private double tookTime;
     private int memberId;
+
+    public int getId() {
+        return id;
+    }
 
     public LocalDate getDate() {
         return date;

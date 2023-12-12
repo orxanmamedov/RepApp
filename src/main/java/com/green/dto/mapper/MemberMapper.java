@@ -6,10 +6,8 @@ import com.green.dto.member.MemberResponseDTO;
 import com.green.entity.Member;
 import com.green.entity.Group;
 
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class MemberMapper {
@@ -53,13 +51,4 @@ public class MemberMapper {
             member.setMarks(new HashMap<>(dto.getMarks()));
         }
     }
-
-    public static MemberResponseDTO mapMemberWithActivityMap(Member member) {
-        MemberResponseDTO dto = MemberMapper.toResponseDTO(member);
-        Map<LocalDate, Double> activityMap = member.getMarks();
-        dto.setMarks(activityMap != null ? new HashMap<>(activityMap) : null);
-
-        return dto;
-    }
-
 }

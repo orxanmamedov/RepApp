@@ -4,10 +4,14 @@ import java.time.LocalDate;
 import java.util.Map;
 
 public class MemberRequestDTO {
-
+    private int id;
     private String name;
     private Map<LocalDate, Double> marks;
     private String nameGroup;
+
+    public int getId() {
+        return id;
+    }
 
     public String getName() {
         return name;

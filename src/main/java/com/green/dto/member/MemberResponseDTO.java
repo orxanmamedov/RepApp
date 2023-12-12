@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 public class MemberResponseDTO {
-    private int id;
+    private Integer id;
     private String name;
     private List<ActivityResponseDTO> activities;
     private Map<LocalDate, Double> marks;
@@ -16,7 +16,7 @@ public class MemberResponseDTO {
 
     public MemberResponseDTO() {
     }
-    public MemberResponseDTO(int id, String name, List<ActivityResponseDTO> activities, Group nameGroup) {
+    public MemberResponseDTO(Integer id, String name, List<ActivityResponseDTO> activities, Group nameGroup) {
         this.id = id;
         this.name = name;
         this.activities = activities;
