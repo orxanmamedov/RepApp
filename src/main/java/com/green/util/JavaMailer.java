@@ -3,23 +3,32 @@ package com.green.util;
 
 
 
+
+import javax.activation.DataHandler;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+
 import java.io.File;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Objects;
+
 import java.util.Properties;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
 
 public class JavaMailer {
+
 
     public void sendMail(String sub, String mes) {
 
@@ -34,6 +43,9 @@ public class JavaMailer {
         }
         final String emailFrom = "javagreengroupandersen@gmail.com";
         String emailTo = "orxanaxbeats@gmail.com";
+
+
+
 
         final Properties properties = new Properties();
         try {
@@ -51,7 +63,11 @@ public class JavaMailer {
                 });
 
 
+
 //        mailSession.setDebug(true);
+
+
+
 
 
         try {
@@ -61,6 +77,8 @@ public class JavaMailer {
             message.setSubject(sub);
             message.setText(mes);
             MimeMultipart multipart = new MimeMultipart();
+
+
 
             MimeBodyPart attachment = new MimeBodyPart();
 
