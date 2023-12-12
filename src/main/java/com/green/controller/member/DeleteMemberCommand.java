@@ -3,15 +3,15 @@ package com.green.controller.member;
 
 import com.green.controller.Command;
 import com.green.controller.ControllerUtils;
-import com.green.service.Service;
+import com.green.service.MemberService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class DeleteMemberCommand implements Command {
-    private final Service service;
+    private final MemberService service;
 
-    public DeleteMemberCommand(Service service) {
+    public DeleteMemberCommand(MemberService service) {
         this.service = service;
     }
 

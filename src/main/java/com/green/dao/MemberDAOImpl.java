@@ -1,31 +1,30 @@
 package com.green.dao;
 
-import com.green.entity.Activity;
+import com.green.HibernateUtil;
+import com.green.dto.mapper.MemberMapper;
+import com.green.dto.member.MemberRequestDTO;
+import com.green.dto.member.MemberResponseDTO;
 import com.green.entity.Member;
 import com.green.exception.CustomApplicationException;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MemberDAOImpl implements MemberDAO {
-
-
-    private final SessionFactory factory = new Configuration()
-            .configure("hibernate.cfg.xml")
-            .addAnnotatedClass(Member.class)
-            .addAnnotatedClass(Activity.class)
-            .buildSessionFactory();
+    private static final SessionFactory factory = HibernateUtil.getSessionFactory();
 
     @Override
-    public List<Member> getListOfMembers() {
+    public List<MemberResponseDTO> getListOfMembers() {
         try (Session session = factory.getCurrentSession()) {
             session.beginTransaction();
             List<Member> members = session.createQuery("from Member", Member.class).getResultList();
             session.getTransaction().commit();
-            return members;
+            return members.stream()
+                    .map(MemberMapper::toResponseDTO)
+                    .collect(Collectors.toList());
         } catch (HibernateException e) {
             throw new CustomApplicationException("Error retrieving list of members", e);
         }
@@ -33,10 +32,11 @@ public class MemberDAOImpl implements MemberDAO {
 
 
     @Override
-    public void saveMember(Member member) {
+    public void saveMember(MemberRequestDTO memberDTO) {
         try (Session session = factory.getCurrentSession()) {
             try {
                 session.beginTransaction();
+                Member member=MemberMapper.fromRequestDTO(memberDTO);
                 session.saveOrUpdate(member);
                 session.getTransaction().commit();
             } catch (HibernateException e) {
@@ -49,13 +49,13 @@ public class MemberDAOImpl implements MemberDAO {
     }
 
     @Override
-    public Member getMemberById(int id) {
+    public MemberResponseDTO getMemberById(int id) {
         try (Session session = factory.getCurrentSession()) {
             try {
                 session.beginTransaction();
                 Member member = session.get(Member.class, id);
                 session.getTransaction().commit();
-                return member;
+                return MemberMapper.toResponseDTO(member);
             } catch (HibernateException e) {
                 if (session.getTransaction() != null && session.getTransaction().isActive()) {
                     session.getTransaction().rollback();
@@ -82,4 +82,28 @@ public class MemberDAOImpl implements MemberDAO {
             }
         }
     }
+    @Override
+    public void updateMember(int memberId, MemberRequestDTO updatedMemberDTO) {
+        try (Session session = factory.getCurrentSession()) {
+            try {
+                session.beginTransaction();
+
+                Member existingMember = session.get(Member.class, memberId);
+                if (existingMember != null) {
+                    MemberMapper.updateFromRequestDTO(existingMember, updatedMemberDTO);
+                    session.saveOrUpdate(existingMember);
+                } else {
+                    throw new CustomApplicationException("Member not found with ID: " + memberId);
+                }
+
+                session.getTransaction().commit();
+            } catch (HibernateException e) {
+                if (session.getTransaction() != null && session.getTransaction().isActive()) {
+                    session.getTransaction().rollback();
+                }
+                throw new CustomApplicationException("Error updating member", e);
+            }
+        }
+    }
+
 }

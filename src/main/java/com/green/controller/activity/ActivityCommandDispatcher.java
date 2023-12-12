@@ -2,8 +2,10 @@ package com.green.controller.activity;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.green.controller.Command;
-import com.green.service.Service;
-import com.green.service.ServiceImpl;
+import com.green.service.ActivityService;
+import com.green.service.ActivityServiceImpl;
+import com.green.service.MemberService;
+import com.green.service.MemberServiceImpl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,14 +13,16 @@ import java.util.Map;
 public class ActivityCommandDispatcher {
     private final Map<String, Command> commands = new HashMap<>();
 
-    public ActivityCommandDispatcher(){
-        Service service = new ServiceImpl();
+    public ActivityCommandDispatcher() {
+        ActivityService activityService = new ActivityServiceImpl();
+        MemberService memberService = new MemberServiceImpl();
         ObjectMapper objectMapper = new ObjectMapper();
-        commands.put("GET", new GetActivityCommand(service, objectMapper));
-        commands.put("POST", new PostActivityCommand(service, objectMapper));
-        commands.put("PUT", new PutActivityCommand(service, objectMapper));
-        commands.put("DELETE", new DeleteActivityCommand(service));
+        commands.put("GET", new GetActivityCommand(activityService, objectMapper));
+        commands.put("POST", new PostActivityCommand(activityService, memberService, objectMapper));
+        commands.put("PUT", new PutActivityCommand(activityService, objectMapper));
+        commands.put("DELETE", new DeleteActivityCommand(activityService));
     }
+
     public Command getCommand(String name) {
         Command command = commands.get(name);
         if (command == null) {
