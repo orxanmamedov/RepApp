@@ -2,15 +2,15 @@ package com.green.controller.activity;
 
 import com.green.controller.Command;
 import com.green.controller.ControllerUtils;
-import com.green.service.Service;
+import com.green.service.ActivityService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class DeleteActivityCommand implements Command {
-    private final Service service;
+    private final ActivityService service;
 
-    public DeleteActivityCommand(Service service) {
+    public DeleteActivityCommand(ActivityService service) {
         this.service = service;
     }
 

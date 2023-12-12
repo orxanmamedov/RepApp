@@ -1,6 +1,7 @@
 package com.green.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,10 +27,12 @@ public class Member {
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "member", fetch = FetchType.EAGER, orphanRemoval = true)
     @JsonManagedReference
     private List<Activity> activities;
+
     public Member() {
     }
-    public void addActivityToMember(Activity activity){
-        if(this.activities == null){
+
+    public void addActivityToMember(Activity activity) {
+        if (this.activities == null) {
             activities = new ArrayList<>();
         }
         activities.add(activity);
@@ -40,6 +43,7 @@ public class Member {
     public Member(String name) {
         this.name = name;
     }
+
     public int getId() {
         return id;
     }

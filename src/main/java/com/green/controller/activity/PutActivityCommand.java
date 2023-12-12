@@ -4,18 +4,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.green.controller.Command;
 import com.green.controller.ControllerUtils;
-import com.green.entity.Activity;
-import com.green.service.Service;
+import com.green.dto.activity.ActivityRequestDTO;
+import com.green.dto.activity.ActivityResponseDTO;
+import com.green.service.ActivityService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class PutActivityCommand implements Command {
-    private final Service service;
+    private final ActivityService service;
     private final ObjectMapper objectMapper;
 
-    public PutActivityCommand(Service service, ObjectMapper objectMapper) {
+    public PutActivityCommand(ActivityService service, ObjectMapper objectMapper) {
         this.service = service;
         this.objectMapper = objectMapper;
         this.objectMapper.registerModule(new JavaTimeModule());
@@ -25,7 +26,7 @@ public class PutActivityCommand implements Command {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IOException {
         String pathInfo = request.getPathInfo();
         int activityId = ControllerUtils.extractIdFromPath(pathInfo);
-        Activity existingActivity = service.getActivityById(activityId);
+        ActivityResponseDTO existingActivity = service.getActivityById(activityId);
 
         if (existingActivity != null) {
             handleUpdateActivity(request, response, activityId);
@@ -36,9 +37,10 @@ public class PutActivityCommand implements Command {
 
     private void handleUpdateActivity(HttpServletRequest request, HttpServletResponse response, int activityId)
             throws IOException {
-        Activity updatedActivity = objectMapper.readValue(request.getReader(), Activity.class);
-        updatedActivity.setId(activityId);
-        service.saveActivity(updatedActivity);
+        ActivityRequestDTO updatedActivityDTO = objectMapper.readValue(request.getReader(), ActivityRequestDTO.class);
+
+        service.updateActivity(activityId, updatedActivityDTO);
+
         response.setStatus(HttpServletResponse.SC_OK);
     }
 
