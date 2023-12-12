@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Objects;
@@ -21,6 +22,16 @@ import java.util.Properties;
 public class JavaMailer {
 
     public void sendMail(String sub, String mes) {
+
+        try {
+            ReportJasper.report();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
         final String emailFrom = "javagreengroupandersen@gmail.com";
         String emailTo = "orxanaxbeats@gmail.com";
 
@@ -53,9 +64,10 @@ public class JavaMailer {
 
             MimeBodyPart attachment = new MimeBodyPart();
 
+            String exportFileName = "reportGreen.pdf";
+            URL exportPath = ReportJasper.class.getClassLoader().getResource(exportFileName);
 
-            attachment.attachFile(new File(Objects.requireNonNull(JavaMailer.class
-                    .getClassLoader().getResource("test.pdf")).toURI()));
+            attachment.attachFile(new File(Objects.requireNonNull((exportPath.toURI()))));
 
             MimeBodyPart messageBodyPart = new MimeBodyPart();
             messageBodyPart.setContent("<h1 style=\"color:green;\">Green Group Daily Report</h1>", "text/html");
