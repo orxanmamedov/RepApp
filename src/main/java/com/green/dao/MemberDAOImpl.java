@@ -105,5 +105,32 @@ public class MemberDAOImpl implements MemberDAO {
             }
         }
     }
-
+    @Override
+    public List<MemberResponseDTO> getMembersByGroupName(String groupName) {
+        try (Session session = factory.getCurrentSession()) {
+            session.beginTransaction();
+            List<Member> members = session.createQuery("from Member m where m.nameGroup.name = :groupName", Member.class)
+                    .setParameter("groupName", groupName)
+                    .getResultList();
+            session.getTransaction().commit();
+            return members.stream()
+                    .map(MemberMapper::toResponseDTO)
+                    .collect(Collectors.toList());
+        } catch (HibernateException e) {
+            throw new CustomApplicationException("Error retrieving members by group name", e);
+        }
+    }
+    @Override
+    public List<MemberResponseDTO> getListOfMembersWithActivityMap() {
+        try (Session session = factory.getCurrentSession()) {
+            session.beginTransaction();
+            List<Member> members = session.createQuery("from Member", Member.class).getResultList();
+            session.getTransaction().commit();
+            return members.stream()
+                    .map(MemberMapper::mapMemberWithActivityMap)
+                    .collect(Collectors.toList());
+        } catch (HibernateException e) {
+            throw new CustomApplicationException("Error retrieving list of members with activity maps", e);
+        }
+    }
 }

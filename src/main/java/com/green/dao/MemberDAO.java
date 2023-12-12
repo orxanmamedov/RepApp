@@ -11,8 +11,7 @@ public interface MemberDAO {
      MemberResponseDTO getMemberById(int id);
      void deleteMember(int id);
      void updateMember(int memberId, MemberRequestDTO updatedMemberDTO);
+     List<MemberResponseDTO> getMembersByGroupName(String groupName);
 
-
-
-
+    List<MemberResponseDTO> getListOfMembersWithActivityMap();
 }

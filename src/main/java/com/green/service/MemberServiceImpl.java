@@ -4,7 +4,6 @@ import com.green.dao.MemberDAO;
 import com.green.dao.MemberDAOImpl;
 import com.green.dto.member.MemberRequestDTO;
 import com.green.dto.member.MemberResponseDTO;
-import com.green.entity.Member;
 
 import java.util.List;
 
@@ -32,4 +31,12 @@ public class MemberServiceImpl implements MemberService{
 
     public void updateMember(int memberId, MemberRequestDTO updatedMemberDTO){memberDAO.updateMember(memberId,updatedMemberDTO);}
 
+    @Override
+    public List<MemberResponseDTO> getMembersByGroupName(String nameGroupParam) {
+        return memberDAO.getMembersByGroupName(nameGroupParam);
+    }
+    @Override
+    public List<MemberResponseDTO> getListOfMembersWithActivityMap() {
+        return memberDAO.getListOfMembersWithActivityMap();
+    }
 }

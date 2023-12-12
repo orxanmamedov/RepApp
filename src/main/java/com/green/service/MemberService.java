@@ -12,4 +12,7 @@ public interface MemberService  {
     MemberResponseDTO getMemberById(int id);
     void deleteMember(int id);
     void updateMember(int memberId, MemberRequestDTO updatedMemberDTO);
+    List<MemberResponseDTO> getMembersByGroupName(String nameGroupParam);
+
+    List<MemberResponseDTO> getListOfMembersWithActivityMap();
 }
