@@ -5,10 +5,17 @@ package com.green.util;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
+import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Objects;
 import java.util.Properties;
 
 public class JavaMailer {
@@ -16,14 +23,13 @@ public class JavaMailer {
     public void sendMail(String sub, String mes) {
         final String emailFrom = "javagreengroupandersen@gmail.com";
         String emailTo = "orxanaxbeats@gmail.com";
-        String host = "smtp.gmail.com";
-        String smtpPort = "465";
 
         final Properties properties = new Properties();
-        properties.put("mail.smtp.host", host);
-        properties.put("mail.smtp.port", smtpPort);
-        properties.put("mail.smtp.ssl.enable", "true");
-        properties.put("mail.smtp.auth", "true");
+        try {
+            properties.load(JavaMailer.class.getClassLoader().getResourceAsStream("email.properties"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         Session mailSession = Session.getInstance(properties,
                 new Authenticator() {
@@ -34,18 +40,36 @@ public class JavaMailer {
                 });
 
 
-        mailSession.setDebug(true);
+//        mailSession.setDebug(true);
+
+
         try {
             MimeMessage message = new MimeMessage(mailSession);
             message.setFrom(new InternetAddress(emailFrom));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(emailTo));
             message.setSubject(sub);
             message.setText(mes);
-            Transport.send(message);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            MimeMultipart multipart = new MimeMultipart();
 
+            MimeBodyPart attachment = new MimeBodyPart();
+
+
+            attachment.attachFile(new File(Objects.requireNonNull(JavaMailer.class
+                    .getClassLoader().getResource("test.pdf")).toURI()));
+
+            MimeBodyPart messageBodyPart = new MimeBodyPart();
+            messageBodyPart.setContent("<h1 style=\"color:green;\">Green Group Daily Report</h1>", "text/html");
+
+            multipart.addBodyPart(attachment);
+            multipart.addBodyPart(messageBodyPart);
+            message.setContent(multipart);
+
+            Transport.send(message);
+        } catch (MessagingException | IOException e) {
+            e.printStackTrace();
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
 
 
     }
