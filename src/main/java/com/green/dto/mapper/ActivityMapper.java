@@ -29,21 +29,17 @@ public class ActivityMapper {
     }
 
     public static void updateFromRequestDTO(Activity activity, ActivityRequestDTO dto) {
+
+        if (dto.getDate() != null) {
             activity.setDate(dto.getDate());
-            activity.setSubject(dto.getSubject());
-            activity.setTookTime(dto.getTookTime());
         }
 
-//        if (dto.getDate() != null) {
-//            activity.setDate(dto.getDate());
-//        }
-//
-//        if (dto.getSubject() != null) {
-//            activity.setSubject(dto.getSubject());
-//        }
-//
-//        if (dto.getTookTime() != 0.0) {
-//            activity.setTookTime(dto.getTookTime());
-//        }
-//    }
+        if (dto.getSubject() != null) {
+            activity.setSubject(dto.getSubject());
+        }
+
+        if (dto.getTookTime() != 0.0) {
+            activity.setTookTime(dto.getTookTime());
+        }
+    }
 }

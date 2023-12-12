@@ -33,6 +33,8 @@ public class ActivityServiceImpl implements ActivityService {
 
     @Override
     public void updateActivity(int activityId, ActivityRequestDTO updatedActivityDTO) {
+        activityDAO.updateActivity(activityId,updatedActivityDTO);
+
 
     }
 
