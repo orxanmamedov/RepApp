@@ -1,10 +1,9 @@
 package com.green.controller.member;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import com.green.controller.Command;
-import com.green.service.Service;
-import com.green.service.ServiceImpl;
+import com.green.service.MemberService;
+import com.green.service.MemberServiceImpl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,14 +12,15 @@ public class MemberCommandDispatcher {
 
     private final Map<String, Command> commands = new HashMap<>();
 
-    public MemberCommandDispatcher(){
-        Service service = new ServiceImpl();
+    public MemberCommandDispatcher() {
+        MemberService memberService = new MemberServiceImpl();
         ObjectMapper objectMapper = new ObjectMapper();
-        commands.put("GET", new GetMemberCommand(service, objectMapper));
-        commands.put("POST", new PostMemberCommand(service, objectMapper));
-        commands.put("PUT", new PutMemberCommand(service, objectMapper));
-        commands.put("DELETE", new DeleteMemberCommand(service));
+        commands.put("GET", new GetMemberCommand(memberService, objectMapper));
+        commands.put("POST", new PostMemberCommand(memberService, objectMapper));
+        commands.put("PUT", new PutMemberCommand(memberService, objectMapper));
+        commands.put("DELETE", new DeleteMemberCommand(memberService));
     }
+
     public Command getCommand(String name) {
         Command command = commands.get(name);
         if (command == null) {
