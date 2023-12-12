@@ -1,8 +1,12 @@
 package com.green.dto.mapper;
 
+import com.green.dto.activity.ActivityResponseDTO;
 import com.green.dto.member.MemberRequestDTO;
 import com.green.dto.member.MemberResponseDTO;
 import com.green.entity.Member;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class MemberMapper {
     private MemberMapper(){}
@@ -11,8 +15,22 @@ public class MemberMapper {
         MemberResponseDTO dto = new MemberResponseDTO();
         dto.setId(member.getId());
         dto.setName(member.getName());
+
+        List<ActivityResponseDTO> activityDTOs = member.getActivities().stream()
+                .map(ActivityMapper::toResponseDTO)
+                .collect(Collectors.toList());
+
+        dto.setActivities(activityDTOs);
+
         return dto;
     }
+
+//    public static MemberResponseDTO toResponseDTO(Member member) {
+//        MemberResponseDTO dto = new MemberResponseDTO();
+//        dto.setId(member.getId());
+//        dto.setName(member.getName());
+//        return dto;
+//    }
 
     public static Member fromRequestDTO(MemberRequestDTO dto) {
         Member member = new Member();
