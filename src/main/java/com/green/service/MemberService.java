@@ -5,14 +5,14 @@ import com.green.dto.member.MemberResponseDTO;
 import com.green.entity.Member;
 
 import java.util.List;
+import java.util.Map;
 
 public interface MemberService  {
-    List<MemberResponseDTO> getListOfMembers();
+
+    List<MemberResponseDTO> getListOfMembers(Map<String,String[]> params);
     void saveMember(MemberRequestDTO memberDTO);
     MemberResponseDTO getMemberById(int id);
     void deleteMember(int id);
     void updateMember(int memberId, MemberRequestDTO updatedMemberDTO);
-    List<MemberResponseDTO> getMembersByGroupName(String nameGroupParam);
 
-    List<MemberResponseDTO> getListOfMembersWithActivityMap();
 }

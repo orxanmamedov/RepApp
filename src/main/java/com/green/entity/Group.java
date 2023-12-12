@@ -8,21 +8,21 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "name_groups")
-public class MemberGroup {
+@Table(name = "members_groups")
+public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
-    @Column(name = "group_name")
-    private String groupName;
+    @Column(name = "name")
+    private String name;
 
-    public MemberGroup() {
+    public Group() {
     }
 
-    public MemberGroup(String groupName) {
-        this.groupName = groupName;
+    public Group(String groupName) {
+        this.name = groupName;
     }
 
     public int getId() {
@@ -33,11 +33,11 @@ public class MemberGroup {
         this.id = id;
     }
 
-    public String getGroupName() {
-        return groupName;
+    public String getName() {
+        return name;
     }
 
-    public void setGroupName(String groupName) {
-        this.groupName = groupName;
+    public void setName(String groupName) {
+        this.name = groupName;
     }
 }

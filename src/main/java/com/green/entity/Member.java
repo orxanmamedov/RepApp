@@ -35,48 +35,40 @@ public class Member {
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "member", fetch = FetchType.EAGER, orphanRemoval = true)
     @JsonManagedReference
     private List<Activity> activities;
+
     @ManyToOne
     @JoinColumn(name = "group_id")
-    private MemberGroup nameGroup;
+    private Group group;
 
-    @ElementCollection
-    @CollectionTable(name = "member_activities", joinColumns = @JoinColumn(name = "member_id"))
-    @MapKeyColumn(name = "activity_date")
-    @Column(name = "activity_value")
-    @Basic(optional = true)
-    private Map<LocalDate, Double> activityMap;
 
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "date_marks", joinColumns = @JoinColumn(name = "member_id"))
+    @MapKeyColumn(name = "date")
+    @Column(name = "mark")
+    private Map<LocalDate, Double> marks;
 
     public Member() {
     }
 
-    public void addActivityToMember(Activity activity) {
-        if (this.activities == null) {
-            activities = new ArrayList<>();
-        }
-        activities.add(activity);
-        activity.setMember(this);
 
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
-    public void setNameGroup(MemberGroup nameGroup) {
-        this.nameGroup = nameGroup;
-    }
-
-    public void setActivityMap(Map<LocalDate, Double> activityMap) {
-        this.activityMap = activityMap;
+    public void setActivityMap(Map<LocalDate, Double> marks) {
+        this.marks = marks;
     }
 
     public Member(String name) {
         this.name = name;
     }
 
-    public MemberGroup getNameGroup() {
-        return nameGroup;
+    public Group getGroup() {
+        return group;
     }
 
-    public Map<LocalDate, Double> getActivityMap() {
-        return activityMap;
+    public Map<LocalDate, Double> getMarks() {
+        return marks;
     }
 
     public int getId() {

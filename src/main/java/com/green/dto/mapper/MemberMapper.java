@@ -4,7 +4,7 @@ import com.green.dto.activity.ActivityResponseDTO;
 import com.green.dto.member.MemberRequestDTO;
 import com.green.dto.member.MemberResponseDTO;
 import com.green.entity.Member;
-import com.green.entity.MemberGroup;
+import com.green.entity.Group;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -25,11 +25,11 @@ public class MemberMapper {
                 .map(ActivityMapper::toResponseDTO)
                 .collect(Collectors.toList());
         dto.setActivities(activityDTOs);
-        if (member.getNameGroup() != null) {
-            dto.setNameGroup(member.getNameGroup().getGroupName());
+        if (member.getGroup() != null) {
+            dto.setNameGroup(member.getGroup().getName());
         }
-        if (member.getActivityMap() != null) {
-            dto.setActivityMap(new HashMap<>(member.getActivityMap()));
+        if (member.getMarks() != null) {
+            dto.setActivityMap(new HashMap<>(member.getMarks()));
         }
 
         return dto;
@@ -47,7 +47,7 @@ public class MemberMapper {
             member.setName(dto.getName());
         }
         if (dto.getNameGroup() != null) {
-            member.setNameGroup(new MemberGroup(dto.getNameGroup()));
+            member.setGroup(new Group(dto.getNameGroup()));
         }
         if (dto.getActivityMap() != null) {
             member.setActivityMap(new HashMap<>(dto.getActivityMap()));
@@ -56,7 +56,7 @@ public class MemberMapper {
 
     public static MemberResponseDTO mapMemberWithActivityMap(Member member) {
         MemberResponseDTO dto = MemberMapper.toResponseDTO(member);
-        Map<LocalDate, Double> activityMap = member.getActivityMap();
+        Map<LocalDate, Double> activityMap = member.getMarks();
         dto.setActivityMap(activityMap != null ? new HashMap<>(activityMap) : null);
 
         return dto;

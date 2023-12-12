@@ -1,7 +1,7 @@
 package com.green.dto.member;
 
 import com.green.dto.activity.ActivityResponseDTO;
-import com.green.entity.MemberGroup;
+import com.green.entity.Group;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -16,11 +16,11 @@ public class MemberResponseDTO {
 
     public MemberResponseDTO() {
     }
-    public MemberResponseDTO(int id, String name, List<ActivityResponseDTO> activities, MemberGroup nameGroup) {
+    public MemberResponseDTO(int id, String name, List<ActivityResponseDTO> activities, Group nameGroup) {
         this.id = id;
         this.name = name;
         this.activities = activities;
-        this.nameGroup = (nameGroup != null) ? nameGroup.getGroupName() : null;
+        this.nameGroup = (nameGroup != null) ? nameGroup.getName() : null;
     }
     public String getNameGroup() {
         return nameGroup;
