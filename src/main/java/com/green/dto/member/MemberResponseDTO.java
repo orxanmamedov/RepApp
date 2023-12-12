@@ -11,7 +11,7 @@ public class MemberResponseDTO {
     private int id;
     private String name;
     private List<ActivityResponseDTO> activities;
-    private Map<LocalDate, Double> activityMap;
+    private Map<LocalDate, Double> marks;
     private String nameGroup;
 
     public MemberResponseDTO() {
@@ -33,12 +33,12 @@ public class MemberResponseDTO {
         return activities;
     }
 
-    public Map<LocalDate, Double> getActivityMap() {
-        return activityMap;
+    public Map<LocalDate, Double> getMarks() {
+        return marks;
     }
 
-    public void setActivityMap(Map<LocalDate, Double> activityMap) {
-        this.activityMap = activityMap;
+    public void setMarks(Map<LocalDate, Double> marks) {
+        this.marks = marks;
     }
 
     public void setActivities(List<ActivityResponseDTO> activities) {

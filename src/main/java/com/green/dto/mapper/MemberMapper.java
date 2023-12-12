@@ -29,7 +29,7 @@ public class MemberMapper {
             dto.setNameGroup(member.getGroup().getName());
         }
         if (member.getMarks() != null) {
-            dto.setActivityMap(new HashMap<>(member.getMarks()));
+            dto.setMarks(new HashMap<>(member.getMarks()));
         }
 
         return dto;
@@ -49,15 +49,15 @@ public class MemberMapper {
         if (dto.getNameGroup() != null) {
             member.setGroup(new Group(dto.getNameGroup()));
         }
-        if (dto.getActivityMap() != null) {
-            member.setActivityMap(new HashMap<>(dto.getActivityMap()));
+        if (dto.getMarks() != null) {
+            member.setMarks(new HashMap<>(dto.getMarks()));
         }
     }
 
     public static MemberResponseDTO mapMemberWithActivityMap(Member member) {
         MemberResponseDTO dto = MemberMapper.toResponseDTO(member);
         Map<LocalDate, Double> activityMap = member.getMarks();
-        dto.setActivityMap(activityMap != null ? new HashMap<>(activityMap) : null);
+        dto.setMarks(activityMap != null ? new HashMap<>(activityMap) : null);
 
         return dto;
     }

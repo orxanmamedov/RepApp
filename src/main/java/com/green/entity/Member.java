@@ -55,7 +55,7 @@ public class Member {
         this.group = group;
     }
 
-    public void setActivityMap(Map<LocalDate, Double> marks) {
+    public void setMarks(Map<LocalDate, Double> marks) {
         this.marks = marks;
     }
 

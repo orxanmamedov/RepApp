@@ -6,7 +6,7 @@ import java.util.Map;
 public class MemberRequestDTO {
 
     private String name;
-    private Map<LocalDate, Double> activityMap;
+    private Map<LocalDate, Double> marks;
     private String nameGroup;
 
     public String getName() {
@@ -23,11 +23,11 @@ public class MemberRequestDTO {
     public void setNameGroup(String nameGroup) {
         this.nameGroup = nameGroup;
     }
-    public Map<LocalDate, Double> getActivityMap() {
-        return activityMap;
+    public Map<LocalDate, Double> getMarks() {
+        return marks;
     }
 
-    public void setActivityMap(Map<LocalDate, Double> activityMap) {
-        this.activityMap = activityMap;
+    public void setMarks(Map<LocalDate, Double> marks) {
+        this.marks = marks;
     }
 }
