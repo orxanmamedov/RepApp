@@ -21,6 +21,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Entity
 @Table(name = "members")
@@ -34,23 +35,25 @@ public class Member {
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "member", fetch = FetchType.EAGER, orphanRemoval = true)
     @JsonManagedReference
-    private List<Activity> activities;
+    private Set<Activity> activities;
 
     @ManyToOne
     @JoinColumn(name = "group_id")
     private Group group;
 
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "member", fetch = FetchType.EAGER, orphanRemoval = true)
-    private List<MemberMark> memberMarks;
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "member", fetch = FetchType.EAGER, orphanRemoval = true)
+    private Set<MemberMark> memberMarks;
+
+
     public Member() {
     }
 
-    public List<MemberMark> getMemberMarks() {
+    public Set<MemberMark> getMemberMarks() {
         return memberMarks;
     }
 
-    public void setMemberMarks(List<MemberMark> memberMarks) {
+    public void setMemberMarks(Set<MemberMark> memberMarks) {
         this.memberMarks = memberMarks;
     }
 
@@ -80,11 +83,11 @@ public class Member {
         this.name = name;
     }
 
-    public List<Activity> getActivities() {
+    public Set<Activity> getActivities() {
         return activities;
     }
 
-    public void setActivities(List<Activity> activities) {
+    public void setActivities(Set<Activity> activities) {
         this.activities = activities;
     }
 

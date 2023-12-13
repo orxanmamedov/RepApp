@@ -1,6 +1,7 @@
 package com.green.dto.mapper;
 
 import com.green.dto.activity.ActivityResponseDTO;
+import com.green.dto.marks.MemberMarkResponseDTO;
 import com.green.dto.member.MemberRequestDTO;
 import com.green.dto.member.MemberResponseDTO;
 import com.green.entity.Member;
@@ -30,9 +31,11 @@ public class MemberMapper {
             dto.setNameGroup(member.getGroup().getName());
         }
         if (member.getMemberMarks() != null) {
-            Map<LocalDate, Double> marksMap = member.getMemberMarks().stream()
-                    .collect(Collectors.toMap(MemberMark::getDate, MemberMark::getMark));
-            dto.setMarks(new HashMap<>(marksMap));
+            List<MemberMarkResponseDTO> marksList = member.getMemberMarks().stream()
+                    .map(MemberMarkMapper::toResponseDTO)
+                    .collect(Collectors.toList());
+
+            dto.setMarks(marksList);
         }
 
         return dto;

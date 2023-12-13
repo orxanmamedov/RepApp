@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "member_marks")
+@Table(name = "members_marks")
 public class MemberMark {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
