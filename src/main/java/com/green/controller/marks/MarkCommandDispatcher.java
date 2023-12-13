@@ -21,13 +21,12 @@ public class MarkCommandDispatcher {
 
     public MarkCommandDispatcher() {
         MemberMarkService memberMarkService = new MemberMarkServiceImpl();
+        MemberService memberService = new MemberServiceImpl();
         ObjectMapper objectMapper = new ObjectMapper();
-//        commands.put("GET", new GetMemberMarkCommand(memberMarkService, objectMapper));
-//        commands.put("POST", new PostMemberMarkCommand(memberMarkService, objectMapper));
-//        commands.put("PUT", new PutMemberMarkCommand(memberMarkService, objectMapper));
-//        commands.put("DELETE", new DeleteMemberMarkCommand(memberMarkService, objectMapper));
+        commands.put("POST", new PostMarkCommand(memberMarkService,memberService,objectMapper));
+        commands.put("PUT", new PutMarkCommand(memberMarkService, objectMapper));
+        commands.put("DELETE", new DeleteMarkCommand(memberMarkService, objectMapper));
     }
-
     public Command getCommand(String name) {
         Command command = commands.get(name);
         if (command == null) {

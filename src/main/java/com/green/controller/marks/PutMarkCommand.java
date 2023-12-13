@@ -23,7 +23,6 @@ public class PutMarkCommand implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IOException {
         MemberMarkRequestDTO updatedMemberMarkDTO = objectMapper.readValue(request.getReader(), MemberMarkRequestDTO.class);
-
         if (updatedMemberMarkDTO.getId() != 0) {
             service.updateMemberMark(updatedMemberMarkDTO.getId(), updatedMemberMarkDTO);
             response.setStatus(HttpServletResponse.SC_OK);

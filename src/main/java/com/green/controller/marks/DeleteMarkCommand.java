@@ -24,7 +24,6 @@ public class DeleteMarkCommand implements Command {
         if (memberMarkRequestDTO.getId() != 0) {
             int memberMarkId = memberMarkRequestDTO.getId();
             service.deleteMemberMark(memberMarkId);
-
             response.setStatus(HttpServletResponse.SC_NO_CONTENT);
         } else {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
