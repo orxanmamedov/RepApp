@@ -35,7 +35,7 @@ public class ReportJasper {
         }
         try {
             JasperReport report = JasperCompileManager.compileReport(Paths.get(reportPath.toURI()).toString());
-
+            Class.forName("com.mysql.jdbc.Driver");
             Connection connection = DriverManager.getConnection("jdbc:mysql://34.16.190.220:3306/project", "orkhan", "1234Orkhan!");
 
 
@@ -46,6 +46,8 @@ public class ReportJasper {
         } catch (JRException e) {
             throw new RuntimeException(e);
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
