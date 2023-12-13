@@ -85,6 +85,7 @@ public class JavaMailer {
             message.setContent(multipart);
 
             Transport.send(message);
+            System.out.println("Email was sent");
         } catch (MessagingException | IOException e) {
             e.printStackTrace();
         } catch (URISyntaxException e) {
