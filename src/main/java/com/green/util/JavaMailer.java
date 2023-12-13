@@ -45,8 +45,6 @@ public class JavaMailer {
         String emailTo = "orxanaxbeats@gmail.com";
 
 
-
-
         final Properties properties = new Properties();
         try {
             properties.load(JavaMailer.class.getClassLoader().getResourceAsStream("email.properties"));
@@ -62,13 +60,7 @@ public class JavaMailer {
                     }
                 });
 
-
-
 //        mailSession.setDebug(true);
-
-
-
-
 
         try {
             MimeMessage message = new MimeMessage(mailSession);
@@ -77,8 +69,6 @@ public class JavaMailer {
             message.setSubject(sub);
             message.setText(mes);
             MimeMultipart multipart = new MimeMultipart();
-
-
 
             MimeBodyPart attachment = new MimeBodyPart();
 

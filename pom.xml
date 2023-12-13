@@ -100,24 +100,6 @@
       <artifactId>jasperreports</artifactId>
       <version>6.20.5</version>
     </dependency>
-    <dependency>
-      <groupId>org.apache.poi</groupId>
-      <artifactId>poi</artifactId>
-      <version>5.2.2</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.apache.poi</groupId>
-      <artifactId>poi-ooxml</artifactId>
-      <version>5.2.2</version>
-    </dependency>
-
-    <dependency>
-      <groupId>org.apache.pdfbox</groupId>
-      <artifactId>pdfbox</artifactId>
-      <version>2.0.24</version>
-
-    </dependency>
 
 
   </dependencies>
@@ -129,31 +111,6 @@
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
 
-        <plugin>
-          <groupId>com.alexnederlof</groupId>
-          <artifactId>jasperreports-plugin</artifactId>
-          <version>2.8</version>
-          <executions>
-            <execution>
-              <phase>process-sources</phase>
-              <goals>
-                <goal>jasper</goal>
-              </goals>
-            </execution>
-          </executions>
-          <configuration>
-            <!-- These are the default configurations: -->
-            <compiler>net.sf.jasperreports.engine.design.JRJdtCompiler</compiler>
-            <sourceDirectory>src/main/jasperreports</sourceDirectory>
-            <outputDirectory>${project.build.directory}/jasper</outputDirectory>
-            <outputFileExt>.jasper</outputFileExt>
-            <xmlValidation>true</xmlValidation>
-            <verbose>false</verbose>
-            <numberOfThreads>4</numberOfThreads>
-            <failOnMissingSourceDirectory>true</failOnMissingSourceDirectory>
-            <sourceScanner>org.codehaus.plexus.compiler.util.scan.StaleSourceScanner</sourceScanner>
-          </configuration>
-        </plugin>
 
         <plugin>
           <artifactId>maven-clean-plugin</artifactId>
@@ -183,35 +140,6 @@
         <plugin>
           <artifactId>maven-deploy-plugin</artifactId>
           <version>2.8.2</version>
-        </plugin>
-        <plugin>
-          <groupId>org.codehaus.mojo</groupId>
-          <artifactId>jasperreports-maven-plugin</artifactId>
-          <configuration>
-            <outputDirectory>target/${project.artifactId}/WEB-INF/reports</outputDirectory>
-          </configuration>
-          <executions>
-            <execution>
-              <phase>prepare-package</phase>
-              <inherited>false</inherited>
-              <goals>
-                <goal>compile-reports</goal>
-              </goals>
-            </execution>
-          </executions>
-          <dependencies>
-<!--            <dependency>-->
-<!--              <groupId>net.sf.jasperreports</groupId>-->
-<!--              <artifactId>jasperreports</artifactId>-->
-<!--              <version>3.7.6</version>-->
-<!--            </dependency>-->
-<!--            <dependency>-->
-<!--              <groupId>log4j</groupId>-->
-<!--              <artifactId>log4j</artifactId>-->
-<!--              <version>1.2.16</version>-->
-<!--              <type>jar</type>-->
-<!--            </dependency>-->
-          </dependencies>
         </plugin>
       </plugins>
     </pluginManagement>
