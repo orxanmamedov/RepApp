@@ -74,14 +74,12 @@ public class JavaMailer {
             MimeBodyPart attachment = new MimeBodyPart();
 
             String exportFileName = "reportGreen.pdf";
-            URL exportPath = ReportJasper.class.getClassLoader().getResource(exportFileName);
+            URL exportPath = JavaMailer.class.getClassLoader().getResource(exportFileName);
             if (exportPath == null) {
                 throw new RuntimeException("Resource not found: " + exportFileName);
             }
             attachment.attachFile(new File(Objects.requireNonNull((exportPath.toURI()))));
 
-
-            attachment.attachFile(new File(Objects.requireNonNull((exportPath.toURI()))));
 
             MimeBodyPart messageBodyPart = new MimeBodyPart();
             messageBodyPart.setContent("<h1 style=\"color:green;\">Green Group Daily Report</h1>", "text/html");
