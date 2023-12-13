@@ -11,6 +11,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -26,8 +27,10 @@ public class MemberMarkDAOImpl implements MemberMarkDAO {
         try (Session session = factory.getCurrentSession()) {
             session.beginTransaction();
             Member member = session.get(Member.class, memberId);
-
             MemberMark memberMark = MemberMarkMapper.fromRequestDTO(memberMarkDTO, member);
+
+            memberMark.setDate(LocalDate.now());
+
             session.saveOrUpdate(memberMark);
             session.getTransaction().commit();
         } catch (HibernateException e) {

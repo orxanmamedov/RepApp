@@ -10,11 +10,7 @@ public class MemberMarkRequestDTO {
 
     public MemberMarkRequestDTO() {
     }
-    public MemberMarkRequestDTO(int memberId, LocalDate date, Double mark) {
-        this.memberId = memberId;
-        this.date = date;
-        this.mark = mark;
-    }
+
     public int getId() {
         return id;
     }

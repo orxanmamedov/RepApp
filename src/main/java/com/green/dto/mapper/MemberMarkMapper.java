@@ -5,11 +5,10 @@ import com.green.dto.marks.MemberMarkResponseDTO;
 import com.green.entity.Member;
 import com.green.entity.MemberMark;
 
-import java.util.Objects;
-
 public class MemberMarkMapper {
 
-    private MemberMarkMapper() {}
+    private MemberMarkMapper() {
+    }
 
     public static MemberMarkResponseDTO toResponseDTO(MemberMark memberMark) {
         MemberMarkResponseDTO dto = new MemberMarkResponseDTO();
@@ -29,11 +28,10 @@ public class MemberMarkMapper {
     }
 
     public static void updateFromRequestDTO(MemberMark memberMark, MemberMarkRequestDTO dto) {
-        if (Objects.nonNull(dto.getDate())) {
+        if (dto.getDate() != null) {
             memberMark.setDate(dto.getDate());
         }
-
-        if (Objects.nonNull(dto.getMark())) {
+        if (dto.getMark() != null) {
             memberMark.setMark(dto.getMark());
         }
     }
