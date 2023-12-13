@@ -1,7 +1,9 @@
 package com.green.dto.member;
 
 import com.green.dto.activity.ActivityResponseDTO;
+import com.green.dto.marks.MemberMarkResponseDTO;
 import com.green.entity.Group;
+import com.green.entity.MemberMark;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -11,7 +13,7 @@ public class MemberResponseDTO {
     private Integer id;
     private String name;
     private List<ActivityResponseDTO> activities;
-    private Map<LocalDate, Double> marks;
+    private List<MemberMarkResponseDTO> marks;
     private String nameGroup;
 
     public MemberResponseDTO() {
@@ -33,11 +35,11 @@ public class MemberResponseDTO {
         return activities;
     }
 
-    public Map<LocalDate, Double> getMarks() {
+    public List<MemberMarkResponseDTO> getMarks() {
         return marks;
     }
 
-    public void setMarks(Map<LocalDate, Double> marks) {
+    public void setMarks(List<MemberMarkResponseDTO> marks) {
         this.marks = marks;
     }
 

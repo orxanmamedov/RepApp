@@ -4,13 +4,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ControllerUtils {
     private ControllerUtils(){}
-    public static int extractIdFromPath(String pathInfo){
-        String [] pathSegments=pathInfo.split("/");
-        return Integer.parseInt(pathSegments[pathSegments.length-1]);
-    }
+
     public static void writeJsonResponse(HttpServletResponse response,Object data, ObjectMapper objectMapper)
             throws IOException{
         response.setContentType("application/json");

@@ -32,6 +32,4 @@ public class GetActivityCommand implements Command {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         }
     }
-
-
 }
