@@ -4,15 +4,19 @@ import com.green.dao.MemberDAO;
 import com.green.dao.MemberDAOImpl;
 import com.green.dto.member.MemberRequestDTO;
 import com.green.dto.member.MemberResponseDTO;
-import com.green.entity.Member;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MemberServiceImpl implements MemberService{
     private final MemberDAO memberDAO = new MemberDAOImpl();
     @Override
-    public List<MemberResponseDTO> getListOfMembers() {
-        return memberDAO.getListOfMembers();
+    public List<MemberResponseDTO> getListOfMembers(Map<String,String[]> params) {
+
+        return memberDAO.getListOfMembers(params);
     }
 
     @Override

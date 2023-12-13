@@ -23,27 +23,38 @@ public class PutMemberCommand implements Command {
         this.objectMapper = objectMapper;
         this.objectMapper.registerModule(new JavaTimeModule());
     }
-
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IOException {
-        String pathInfo = request.getPathInfo();
-        int memberId = ControllerUtils.extractIdFromPath(pathInfo);
-        MemberResponseDTO existingMember = service.getMemberById(memberId);
+        MemberRequestDTO member = objectMapper.readValue(request.getReader(), MemberRequestDTO.class);
 
-        if (existingMember != null) {
-           handleUpdateMember(request, response, memberId);
+        if (member.getId() != 0) {
+            int memberId = member.getId();
+            service.updateMember(memberId, member);
+            response.setStatus(HttpServletResponse.SC_OK);
         } else {
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         }
     }
-    private void handleUpdateMember(HttpServletRequest request, HttpServletResponse response, int memberId)
-            throws IOException {
-        MemberRequestDTO updatedMemberDTO = objectMapper.readValue(request.getReader(), MemberRequestDTO.class);
-
-        service.updateMember(memberId, updatedMemberDTO);
-
-        response.setStatus(HttpServletResponse.SC_OK);
-    }
+//    @Override
+//    public void execute(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IOException {
+//        String pathInfo = request.getPathInfo();
+//        int memberId = ControllerUtils.extractIdFromPath(pathInfo);
+//        MemberResponseDTO existingMember = service.getMemberById(memberId);
+//
+//        if (existingMember != null) {
+//           handleUpdateMember(request, response, memberId);
+//        } else {
+//            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+//        }
+//    }
+//    private void handleUpdateMember(HttpServletRequest request, HttpServletResponse response, int memberId)
+//            throws IOException {
+//        MemberRequestDTO updatedMemberDTO = objectMapper.readValue(request.getReader(), MemberRequestDTO.class);
+//
+//        service.updateMember(memberId, updatedMemberDTO);
+//
+//        response.setStatus(HttpServletResponse.SC_OK);
+//    }
 
 
 

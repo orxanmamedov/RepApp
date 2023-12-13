@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.green.controller.Command;
 import com.green.controller.ControllerUtils;
 import com.green.dto.activity.ActivityResponseDTO;
+import com.green.dto.member.MemberResponseDTO;
 import com.green.entity.Activity;
 import com.green.service.ActivityService;
 
@@ -24,27 +25,13 @@ public class GetActivityCommand implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IOException {
-        String pathInfo = request.getPathInfo();
-        if (pathInfo == null) {
-            handleListOfActivities(response);
-        } else {
-            handleSingleActivity(response, pathInfo);
-        }
-    }
-
-    private void handleListOfActivities(HttpServletResponse response) throws IOException {
-        List<ActivityResponseDTO> activities = service.getListOfActivities();
-        ControllerUtils.writeJsonResponse(response, activities, objectMapper);
-    }
-
-    private void handleSingleActivity(HttpServletResponse response, String pathInfo)
-            throws IOException {
-        int activityId = ControllerUtils.extractIdFromPath(pathInfo);
-        ActivityResponseDTO activity = service.getActivityById(activityId);
-        if (activity != null) {
-            ControllerUtils.writeJsonResponse(response, activity, objectMapper);
+        List<ActivityResponseDTO> activities = service.getListOfActivities(request.getParameterMap());
+        if (!activities.isEmpty()) {
+            ControllerUtils.writeJsonResponse(response, activities, objectMapper);
         } else {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         }
     }
+
+
 }

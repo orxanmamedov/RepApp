@@ -21,28 +21,40 @@ public class PutActivityCommand implements Command {
         this.objectMapper = objectMapper;
         this.objectMapper.registerModule(new JavaTimeModule());
     }
-
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IOException {
-        String pathInfo = request.getPathInfo();
-        int activityId = ControllerUtils.extractIdFromPath(pathInfo);
-        ActivityResponseDTO existingActivity = service.getActivityById(activityId);
+        ActivityRequestDTO updatedActivityDTO = objectMapper.readValue(request.getReader(), ActivityRequestDTO.class);
 
-        if (existingActivity != null) {
-            handleUpdateActivity(request, response, activityId);
+        if (updatedActivityDTO.getId() != 0) {
+            int activityId = updatedActivityDTO.getId();
+            service.updateActivity(activityId, updatedActivityDTO);
+            response.setStatus(HttpServletResponse.SC_OK);
         } else {
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         }
     }
 
-    private void handleUpdateActivity(HttpServletRequest request, HttpServletResponse response, int activityId)
-            throws IOException {
-        ActivityRequestDTO updatedActivityDTO = objectMapper.readValue(request.getReader(), ActivityRequestDTO.class);
-
-        service.updateActivity(activityId, updatedActivityDTO);
-
-        response.setStatus(HttpServletResponse.SC_OK);
-    }
+//    @Override
+//    public void execute(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IOException {
+//        String pathInfo = request.getPathInfo();
+//        int activityId = ControllerUtils.extractIdFromPath(pathInfo);
+//        ActivityResponseDTO existingActivity = service.getActivityById(activityId);
+//
+//        if (existingActivity != null) {
+//            handleUpdateActivity(request, response, activityId);
+//        } else {
+//            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+//        }
+//    }
+//
+//    private void handleUpdateActivity(HttpServletRequest request, HttpServletResponse response, int activityId)
+//            throws IOException {
+//        ActivityRequestDTO updatedActivityDTO = objectMapper.readValue(request.getReader(), ActivityRequestDTO.class);
+//
+//        service.updateActivity(activityId, updatedActivityDTO);
+//
+//        response.setStatus(HttpServletResponse.SC_OK);
+//    }
 
 
 }
