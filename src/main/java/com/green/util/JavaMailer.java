@@ -60,7 +60,7 @@ public class JavaMailer {
                     }
                 });
 
-//        mailSession.setDebug(true);
+        mailSession.setDebug(true);
 
         try {
             MimeMessage message = new MimeMessage(mailSession);
@@ -74,6 +74,11 @@ public class JavaMailer {
 
             String exportFileName = "reportGreen.pdf";
             URL exportPath = ReportJasper.class.getClassLoader().getResource(exportFileName);
+            if (exportPath == null) {
+                throw new RuntimeException("Resource not found: " + exportFileName);
+            }
+            attachment.attachFile(new File(Objects.requireNonNull((exportPath.toURI()))));
+
 
             attachment.attachFile(new File(Objects.requireNonNull((exportPath.toURI()))));
 
