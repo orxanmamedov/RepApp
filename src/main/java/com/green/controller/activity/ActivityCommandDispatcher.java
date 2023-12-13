@@ -20,7 +20,7 @@ public class ActivityCommandDispatcher {
         commands.put("GET", new GetActivityCommand(activityService, objectMapper));
         commands.put("POST", new PostActivityCommand(activityService, memberService, objectMapper));
         commands.put("PUT", new PutActivityCommand(activityService, objectMapper));
-        commands.put("DELETE", new DeleteActivityCommand(activityService));
+        commands.put("DELETE", new DeleteActivityCommand(activityService, objectMapper));
     }
 
     public Command getCommand(String name) {
