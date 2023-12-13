@@ -5,9 +5,12 @@ import com.green.dto.member.MemberRequestDTO;
 import com.green.dto.member.MemberResponseDTO;
 import com.green.entity.Member;
 import com.green.entity.Group;
+import com.green.entity.MemberMark;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class MemberMapper {
@@ -26,8 +29,10 @@ public class MemberMapper {
         if (member.getGroup() != null) {
             dto.setNameGroup(member.getGroup().getName());
         }
-        if (member.getMarks() != null) {
-            dto.setMarks(new HashMap<>(member.getMarks()));
+        if (member.getMemberMarks() != null) {
+            Map<LocalDate, Double> marksMap = member.getMemberMarks().stream()
+                    .collect(Collectors.toMap(MemberMark::getDate, MemberMark::getMark));
+            dto.setMarks(new HashMap<>(marksMap));
         }
 
         return dto;
@@ -48,7 +53,12 @@ public class MemberMapper {
             member.setGroup(new Group(dto.getNameGroup()));
         }
         if (dto.getMarks() != null) {
-            member.setMarks(new HashMap<>(dto.getMarks()));
+            List<MemberMark> updatedMemberMarks = dto.getMarks().entrySet().stream()
+                    .map(entry -> new MemberMark(member, entry.getKey(), entry.getValue()))
+                    .collect(Collectors.toList());
+
+            member.getMemberMarks().clear();
+            member.getMemberMarks().addAll(updatedMemberMarks);
         }
     }
 }

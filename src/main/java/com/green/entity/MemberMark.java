@@ -30,9 +30,9 @@ public class MemberMark {
 
     public MemberMark() {
     }
-
-    public MemberMark(Member member, Double mark) {
+    public MemberMark(Member member, LocalDate date, Double mark) {
         this.member = member;
+        this.date = date;
         this.mark = mark;
     }
 
