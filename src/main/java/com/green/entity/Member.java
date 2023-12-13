@@ -41,36 +41,29 @@ public class Member {
     private Group group;
 
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "date_marks", joinColumns = @JoinColumn(name = "member_id"))
-    @MapKeyColumn(name = "date")
-    @Column(name = "mark")
-    private Map<LocalDate, Double> marks;
-
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "member", fetch = FetchType.EAGER, orphanRemoval = true)
+    private List<MemberMark> memberMarks;
     public Member() {
     }
 
+    public List<MemberMark> getMemberMarks() {
+        return memberMarks;
+    }
+
+    public void setMemberMarks(List<MemberMark> memberMarks) {
+        this.memberMarks = memberMarks;
+    }
 
     public void setGroup(Group group) {
         this.group = group;
     }
 
-    public void setMarks(Map<LocalDate, Double> marks) {
-        this.marks = marks;
-    }
-
     public Member(String name) {
         this.name = name;
     }
-
     public Group getGroup() {
         return group;
     }
-
-    public Map<LocalDate, Double> getMarks() {
-        return marks;
-    }
-
     public int getId() {
         return id;
     }
