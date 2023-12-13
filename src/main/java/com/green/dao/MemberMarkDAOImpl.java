@@ -17,6 +17,7 @@ import java.util.Map;
 
 public class MemberMarkDAOImpl implements MemberMarkDAO {
     private static final SessionFactory factory = HibernateUtil.getSessionFactory();
+
     @Override
     public List<MemberMarkResponseDTO> getListOfMemberMarks(Map<String, String[]> params) {
         return null;
@@ -28,9 +29,6 @@ public class MemberMarkDAOImpl implements MemberMarkDAO {
             session.beginTransaction();
             Member member = session.get(Member.class, memberId);
             MemberMark memberMark = MemberMarkMapper.fromRequestDTO(memberMarkDTO, member);
-
-            memberMark.setDate(LocalDate.now());
-
             session.saveOrUpdate(memberMark);
             session.getTransaction().commit();
         } catch (HibernateException e) {

@@ -26,6 +26,7 @@ public class MarkCommandDispatcher {
         commands.put("POST", new PostMarkCommand(memberMarkService,memberService,objectMapper));
         commands.put("PUT", new PutMarkCommand(memberMarkService, objectMapper));
         commands.put("DELETE", new DeleteMarkCommand(memberMarkService, objectMapper));
+        commands.put("GET", new DeleteMarkCommand(memberMarkService, objectMapper));
     }
     public Command getCommand(String name) {
         Command command = commands.get(name);
