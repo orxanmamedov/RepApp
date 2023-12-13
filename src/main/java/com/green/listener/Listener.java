@@ -14,7 +14,7 @@ public class Listener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         // This method will be called when the servlet context is initialized
         TaskToRun taskToRun = new TaskToRun();
-        taskToRun.runTheTaskAtScheduledTime(20, 55, 0);
+        taskToRun.runTheTaskAtScheduledTime(22, 10, 0);
     }
 
 
