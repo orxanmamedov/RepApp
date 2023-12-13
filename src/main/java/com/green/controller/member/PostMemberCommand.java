@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.green.controller.Command;
 import com.green.dto.member.MemberRequestDTO;
-import com.green.entity.Member;
 import com.green.service.MemberService;
 
 import javax.servlet.http.HttpServletRequest;

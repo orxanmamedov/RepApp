@@ -3,11 +3,8 @@ package com.green.dto.member;
 import com.green.dto.activity.ActivityResponseDTO;
 import com.green.dto.marks.MemberMarkResponseDTO;
 import com.green.entity.Group;
-import com.green.entity.MemberMark;
 
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 
 public class MemberResponseDTO {
     private Integer id;
@@ -18,12 +15,14 @@ public class MemberResponseDTO {
 
     public MemberResponseDTO() {
     }
+
     public MemberResponseDTO(Integer id, String name, List<ActivityResponseDTO> activities, Group nameGroup) {
         this.id = id;
         this.name = name;
         this.activities = activities;
         this.nameGroup = (nameGroup != null) ? nameGroup.getName() : null;
     }
+
     public String getNameGroup() {
         return nameGroup;
     }
@@ -31,6 +30,7 @@ public class MemberResponseDTO {
     public void setNameGroup(String nameGroup) {
         this.nameGroup = nameGroup;
     }
+
     public List<ActivityResponseDTO> getActivities() {
         return activities;
     }
@@ -46,6 +46,7 @@ public class MemberResponseDTO {
     public void setActivities(List<ActivityResponseDTO> activities) {
         this.activities = activities;
     }
+
     public int getId() {
         return id;
     }

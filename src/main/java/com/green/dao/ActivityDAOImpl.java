@@ -4,10 +4,8 @@ import com.green.HibernateUtil;
 import com.green.dto.activity.ActivityRequestDTO;
 import com.green.dto.activity.ActivityResponseDTO;
 import com.green.dto.mapper.ActivityMapper;
-
 import com.green.entity.Activity;
 import com.green.entity.Member;
-
 import com.green.exception.CustomApplicationException;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -146,6 +144,7 @@ public class ActivityDAOImpl implements ActivityDAO {
             }
         }
     }
+
     private Map<String, Object> extractParams(Map<String, String[]> parameterMap) {
         Map<String, Object> params = new HashMap<>();
         for (Map.Entry<String, String[]> entry : parameterMap.entrySet()) {
