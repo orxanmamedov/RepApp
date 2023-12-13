@@ -38,8 +38,8 @@ public class ReportJasper {
 
             Connection connection = DriverManager.getConnection("jdbc:mysql://34.16.190.220:3306/project", "orkhan", "1234Orkhan!");
 
-            Map<String, Object> parameters = new HashMap<>();
-            JasperPrint jasperPrint = JasperFillManager.fillReport(report, parameters, connection);
+
+            JasperPrint jasperPrint = JasperFillManager.fillReport(report, null, connection);
 
 
             JasperExportManager.exportReportToPdfFile(jasperPrint, Paths.get(exportPath.toURI()).toString());
