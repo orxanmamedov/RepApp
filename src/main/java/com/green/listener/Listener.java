@@ -1,7 +1,6 @@
 package com.green.listener;
 
 
-import com.green.util.JavaMailer;
 import com.green.util.TaskToRun;
 
 import javax.servlet.ServletContextEvent;
@@ -14,11 +13,8 @@ public class Listener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         // This method will be called when the servlet context is initialized
-//        TaskToRun taskToRun = new TaskToRun();
-//        taskToRun.runTheTaskAtScheduledTime(22, 10, 0);
-        JavaMailer javaMailer = new JavaMailer();
-
-        javaMailer.sendMail("Daily Report", "");
+        TaskToRun taskToRun = new TaskToRun();
+        taskToRun.runTheTaskAtScheduledTime(22, 25, 0);
     }
 
 
