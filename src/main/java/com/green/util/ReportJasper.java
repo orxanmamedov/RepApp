@@ -20,7 +20,7 @@ import java.util.Map;
 
 public class ReportJasper {
 
-    public static void report() throws URISyntaxException, IOException {
+    public void report() throws URISyntaxException, IOException {
 
 
         URL reportPath = ReportJasper.class.getClassLoader().getResource("report.jrxml");

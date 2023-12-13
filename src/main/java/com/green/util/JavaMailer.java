@@ -31,9 +31,10 @@ public class JavaMailer {
 
 
     public void sendMail(String sub, String mes) {
+        ReportJasper reportJasper = new ReportJasper();
 
         try {
-            ReportJasper.report();
+            reportJasper.report();
         } catch (URISyntaxException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
