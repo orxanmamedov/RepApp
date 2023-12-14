@@ -2,6 +2,7 @@ package com.green.controller.marks;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.green.controller.Command;
+import com.green.controller.ControllerUtils;
 import com.green.dto.marks.MemberMarkRequestDTO;
 import com.green.service.MemberMarkService;
 
@@ -21,12 +22,14 @@ public class DeleteMarkCommand implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IOException {
         MemberMarkRequestDTO memberMarkRequestDTO = objectMapper.readValue(request.getReader(), MemberMarkRequestDTO.class);
+        int code = HttpServletResponse.SC_OK;
         if (memberMarkRequestDTO.getId() != 0) {
             int memberMarkId = memberMarkRequestDTO.getId();
             service.deleteMemberMark(memberMarkId);
-            response.setStatus(HttpServletResponse.SC_NO_CONTENT);
         } else {
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            code = HttpServletResponse.SC_BAD_REQUEST;
         }
+        ControllerUtils.writeResponse(response, null, objectMapper, code);
+
     }
 }

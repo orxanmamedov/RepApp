@@ -3,6 +3,7 @@ package com.green.controller.activity;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.green.controller.Command;
+import com.green.controller.ControllerUtils;
 import com.green.dto.activity.ActivityRequestDTO;
 import com.green.service.ActivityService;
 
@@ -23,12 +24,12 @@ public class PutActivityCommand implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IOException {
         ActivityRequestDTO updatedActivityDTO = objectMapper.readValue(request.getReader(), ActivityRequestDTO.class);
-
+        int code = HttpServletResponse.SC_OK;
         if (updatedActivityDTO.getId() != 0) {
             service.updateActivity(updatedActivityDTO.getId(), updatedActivityDTO);
-            response.setStatus(HttpServletResponse.SC_OK);
         } else {
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            code = HttpServletResponse.SC_BAD_REQUEST;
         }
+        ControllerUtils.writeResponse(response, null, objectMapper, code);
     }
 }
