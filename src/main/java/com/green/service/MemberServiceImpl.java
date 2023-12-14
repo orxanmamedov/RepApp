@@ -5,16 +5,14 @@ import com.green.dao.MemberDAOImpl;
 import com.green.dto.member.MemberRequestDTO;
 import com.green.dto.member.MemberResponseDTO;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MemberServiceImpl implements MemberService{
+public class MemberServiceImpl implements MemberService {
     private final MemberDAO memberDAO = new MemberDAOImpl();
+
     @Override
-    public List<MemberResponseDTO> getListOfMembers(Map<String,String[]> params) {
+    public List<MemberResponseDTO> getListOfMembers(Map<String, String[]> params) {
 
         return memberDAO.getListOfMembers(params);
     }
@@ -34,6 +32,8 @@ public class MemberServiceImpl implements MemberService{
         memberDAO.deleteMember(id);
     }
 
-    public void updateMember(int memberId, MemberRequestDTO updatedMemberDTO){memberDAO.updateMember(memberId,updatedMemberDTO);}
+    public void updateMember(int memberId, MemberRequestDTO updatedMemberDTO) {
+        memberDAO.updateMember(memberId, updatedMemberDTO);
+    }
 
 }

@@ -7,8 +7,6 @@ import com.green.controller.Command;
 import com.green.controller.ControllerUtils;
 import com.green.dto.activity.ActivityRequestDTO;
 import com.green.dto.member.MemberResponseDTO;
-import com.green.entity.Activity;
-import com.green.entity.Member;
 import com.green.service.ActivityService;
 import com.green.service.MemberService;
 
@@ -21,10 +19,10 @@ public class PostActivityCommand implements Command {
     private final MemberService memberService;
     private final ObjectMapper objectMapper;
 
-    public PostActivityCommand(ActivityService service,MemberService memberService, ObjectMapper objectMapper) {
+    public PostActivityCommand(ActivityService service, MemberService memberService, ObjectMapper objectMapper) {
         this.activityService = service;
         this.objectMapper = objectMapper;
-        this.memberService =memberService;
+        this.memberService = memberService;
         this.objectMapper.registerModule(new JavaTimeModule());
 
     }

@@ -31,9 +31,10 @@ public class JavaMailer {
 
 
     public void sendMail(String sub, String mes) {
+        ReportJasper reportJasper = new ReportJasper();
 
         try {
-            ReportJasper.report();
+            reportJasper.report();
         } catch (URISyntaxException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
@@ -73,9 +74,12 @@ public class JavaMailer {
             MimeBodyPart attachment = new MimeBodyPart();
 
             String exportFileName = "reportGreen.pdf";
-            URL exportPath = ReportJasper.class.getClassLoader().getResource(exportFileName);
-
+            URL exportPath = JavaMailer.class.getClassLoader().getResource(exportFileName);
+            if (exportPath == null) {
+                throw new RuntimeException("Resource not found: " + exportFileName);
+            }
             attachment.attachFile(new File(Objects.requireNonNull((exportPath.toURI()))));
+
 
             MimeBodyPart messageBodyPart = new MimeBodyPart();
             messageBodyPart.setContent("<h1 style=\"color:green;\">Green Group Daily Report</h1>", "text/html");
@@ -85,6 +89,7 @@ public class JavaMailer {
             message.setContent(multipart);
 
             Transport.send(message);
+            System.out.println("Email was sent at " + LocalDateTime.now());
         } catch (MessagingException | IOException e) {
             e.printStackTrace();
         } catch (URISyntaxException e) {
