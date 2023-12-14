@@ -4,6 +4,7 @@ package com.green.controller.activity;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.green.controller.Command;
+import com.green.controller.ControllerUtils;
 import com.green.dto.activity.ActivityRequestDTO;
 import com.green.dto.member.MemberResponseDTO;
 import com.green.service.ActivityService;
@@ -32,6 +33,6 @@ public class PostActivityCommand implements Command {
         MemberResponseDTO memberResponseDTO = memberService.getMemberById(activityDTO.getMemberId());
         activityDTO.setMemberId(memberResponseDTO.getId());
         activityService.saveActivity(activityDTO);
-        response.setStatus(HttpServletResponse.SC_CREATED);
+        ControllerUtils.writeResponse(response, null, objectMapper, HttpServletResponse.SC_CREATED);
     }
 }

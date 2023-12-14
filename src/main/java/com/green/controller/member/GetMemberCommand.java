@@ -28,13 +28,8 @@ public class GetMemberCommand implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IOException {
-
         List<MemberResponseDTO> members = service.getListOfMembers(request.getParameterMap());
-        if (!members.isEmpty()) {
-            ControllerUtils.writeJsonResponse(response, members, objectMapper);
-        } else {
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-        }
+        ControllerUtils.writeResponse(response, members, objectMapper, HttpServletResponse.SC_OK);
     }
 }
 

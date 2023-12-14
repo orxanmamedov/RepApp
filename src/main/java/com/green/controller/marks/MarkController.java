@@ -3,6 +3,7 @@ package com.green.controller.marks;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.green.controller.Command;
+import com.green.controller.ControllerUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,11 +28,13 @@ public class MarkController  extends HttpServlet {
             resp) throws ServletException, IOException {
         String method = req.getMethod();
         Command command = commandDispatcher.getCommand(method);
+        int code = HttpServletResponse.SC_OK;
         if (command != null) {
             command.execute(req, resp);
         } else {
-            resp.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+            code = HttpServletResponse.SC_METHOD_NOT_ALLOWED;
         }
+        ControllerUtils.writeResponse(resp, null, objectMapper, code);
     }
 }
 

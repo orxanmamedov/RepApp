@@ -3,6 +3,7 @@ package com.green.controller.marks;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.green.controller.Command;
+import com.green.controller.ControllerUtils;
 import com.green.dto.marks.MemberMarkRequestDTO;
 import com.green.service.MemberMarkService;
 
@@ -23,11 +24,12 @@ public class PutMarkCommand implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IOException {
         MemberMarkRequestDTO updatedMemberMarkDTO = objectMapper.readValue(request.getReader(), MemberMarkRequestDTO.class);
+        int code = HttpServletResponse.SC_OK;
         if (updatedMemberMarkDTO.getId() != 0) {
             service.updateMemberMark(updatedMemberMarkDTO.getId(), updatedMemberMarkDTO);
-            response.setStatus(HttpServletResponse.SC_OK);
         } else {
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            code = HttpServletResponse.SC_BAD_REQUEST;
         }
+        ControllerUtils.writeResponse(response, null, objectMapper, code);
     }
 }
