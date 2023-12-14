@@ -19,6 +19,7 @@ public class MemberCommandDispatcher {
         commands.put("POST", new PostMemberCommand(memberService, objectMapper));
         commands.put("PUT", new PutMemberCommand(memberService, objectMapper));
         commands.put("DELETE", new DeleteMemberCommand(memberService, objectMapper));
+        commands.put("OPTIONS", new OptionsMemberCommand(memberService, objectMapper));
     }
 
     public Command getCommand(String name) {
