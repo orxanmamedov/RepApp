@@ -61,7 +61,7 @@ public class JavaMailer {
                     }
                 });
 
-        mailSession.setDebug(true);
+//        mailSession.setDebug(true);
 
         try {
             MimeMessage message = new MimeMessage(mailSession);
