@@ -26,10 +26,6 @@ public class GetActivityCommand implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IOException {
         List<ActivityResponseDTO> activities = service.getListOfActivities(request.getParameterMap());
-        if (!activities.isEmpty()) {
-            ControllerUtils.writeJsonResponse(response, activities, objectMapper);
-        } else {
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-        }
+        ControllerUtils.writeResponse(response, activities, objectMapper, HttpServletResponse.SC_OK);
     }
 }

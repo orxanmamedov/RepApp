@@ -3,6 +3,7 @@ package com.green.controller.member;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.green.controller.Command;
+import com.green.controller.ControllerUtils;
 import com.green.dto.member.MemberRequestDTO;
 import com.green.service.MemberService;
 
@@ -22,19 +23,13 @@ public class DeleteMemberCommand implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IOException {
         MemberRequestDTO memberRequestDTO = objectMapper.readValue(request.getReader(), MemberRequestDTO.class);
+        int code = HttpServletResponse.SC_OK;
         if (memberRequestDTO.getId() != 0) {
             int memberId = memberRequestDTO.getId();
             service.deleteMember(memberId);
-            response.setStatus(HttpServletResponse.SC_NO_CONTENT);
         } else {
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            code = HttpServletResponse.SC_BAD_REQUEST;
         }
+        ControllerUtils.writeResponse(response, null, objectMapper, code);
     }
-
-//    @Override
-//    public void execute(HttpServletRequest request, HttpServletResponse response) throws SecurityException {
-//        int memberId = ControllerUtils.extractIdFromPath(request.getPathInfo());
-//        service.deleteMember(memberId);
-//        response.setStatus(HttpServletResponse.SC_NO_CONTENT);
-//    }
 }

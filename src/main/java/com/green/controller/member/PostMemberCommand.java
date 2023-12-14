@@ -3,6 +3,7 @@ package com.green.controller.member;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.green.controller.Command;
+import com.green.controller.ControllerUtils;
 import com.green.dto.member.MemberRequestDTO;
 import com.green.entity.Member;
 import com.green.service.MemberService;
@@ -27,6 +28,6 @@ public class PostMemberCommand implements Command {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IOException {
         MemberRequestDTO member = objectMapper.readValue(request.getReader(), MemberRequestDTO.class);
         service.saveMember(member);
-        response.setStatus(HttpServletResponse.SC_CREATED);
+        ControllerUtils.writeResponse(response, null, objectMapper, HttpServletResponse.SC_OK);
     }
 }

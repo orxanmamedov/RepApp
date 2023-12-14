@@ -14,14 +14,17 @@ import java.util.List;
 
 public class GetMarkCommand implements Command {
 
+    private final ActivityService service;
+    private final ObjectMapper objectMapper;
 
+    public GetMarkCommand(ActivityService service, ObjectMapper objectMapper) {
+        this.service = service;
+        this.objectMapper = objectMapper;
+    }
 
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IOException {
-        response.setHeader("Access-Control-Allow-Origin", "*");
-        response.setHeader("Access-Control-Allow-Methods", "*");
-        response.setHeader("Access-Control-Allow-Headers", "*");
-             response.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+        ControllerUtils.writeResponse(response, null, objectMapper, HttpServletResponse.SC_METHOD_NOT_ALLOWED);
     }
 }

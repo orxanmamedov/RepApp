@@ -2,6 +2,7 @@ package com.green.controller.activity;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.green.controller.Command;
+import com.green.controller.ControllerUtils;
 import com.green.dto.activity.ActivityRequestDTO;
 import com.green.service.ActivityService;
 
@@ -22,13 +23,13 @@ public class DeleteActivityCommand implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws SecurityException, IOException {
         ActivityRequestDTO activityRequestDTO = objectMapper.readValue(request.getReader(), ActivityRequestDTO.class);
+        int code = HttpServletResponse.SC_OK;
         if (activityRequestDTO.getId() != 0) {
             int activityId = activityRequestDTO.getId();
             service.deleteActivity(activityId);
-
-            response.setStatus(HttpServletResponse.SC_NO_CONTENT);
         } else {
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            code = HttpServletResponse.SC_BAD_REQUEST;
         }
+        ControllerUtils.writeResponse(response, null, objectMapper, code);
     }
 }
