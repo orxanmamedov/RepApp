@@ -30,11 +30,4 @@ public class DeleteMemberCommand implements Command {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         }
     }
-
-//    @Override
-//    public void execute(HttpServletRequest request, HttpServletResponse response) throws SecurityException {
-//        int memberId = ControllerUtils.extractIdFromPath(request.getPathInfo());
-//        service.deleteMember(memberId);
-//        response.setStatus(HttpServletResponse.SC_NO_CONTENT);
-//    }
 }
