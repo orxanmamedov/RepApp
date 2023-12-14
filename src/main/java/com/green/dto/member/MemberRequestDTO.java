@@ -20,6 +20,7 @@ public class MemberRequestDTO {
     public void setName(String name) {
         this.name = name;
     }
+
     public String getNameGroup() {
         return nameGroup;
     }
@@ -27,6 +28,7 @@ public class MemberRequestDTO {
     public void setNameGroup(String nameGroup) {
         this.nameGroup = nameGroup;
     }
+
     public Map<LocalDate, Double> getMarks() {
         return marks;
     }

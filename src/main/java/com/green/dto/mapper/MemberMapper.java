@@ -4,14 +4,11 @@ import com.green.dto.activity.ActivityResponseDTO;
 import com.green.dto.marks.MemberMarkResponseDTO;
 import com.green.dto.member.MemberRequestDTO;
 import com.green.dto.member.MemberResponseDTO;
-import com.green.entity.Member;
 import com.green.entity.Group;
+import com.green.entity.Member;
 import com.green.entity.MemberMark;
 
-import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class MemberMapper {
