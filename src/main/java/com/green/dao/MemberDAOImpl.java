@@ -41,6 +41,20 @@ public class MemberDAOImpl implements MemberDAO {
                         conditions.add("m.group.name = :groupName");
                         params.put("groupName", param.getValue());
                         break;
+                    case "haveMarksToday":
+                        if (Boolean.parseBoolean(param.getValue().toString())) {
+                            conditions.add("EXISTS " +
+                                    "(SELECT 1 FROM MemberMark mm " +
+                                    "WHERE mm.member = m AND mm.date = current_date())");
+                        } else {
+                            conditions.add("NOT EXISTS " +
+                                    "(SELECT 1 FROM MemberMark mm " +
+                                    "WHERE mm.member = m AND mm.date = current_date())");
+                        }
+
+
+                        params.remove(param.getKey());
+                        break;
                 }
             }
             queryString.append(String.join(" AND ", conditions));
