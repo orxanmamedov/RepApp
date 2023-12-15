@@ -11,10 +11,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class MemberDAOImpl implements MemberDAO {
@@ -24,10 +21,13 @@ public class MemberDAOImpl implements MemberDAO {
     public List<MemberResponseDTO> getListOfMembers(Map<String, String[]> parameterMap) {
         Map<String, Object> params = extractParams(parameterMap);
         StringBuilder queryString = new StringBuilder("SELECT m FROM Member m");
+
         if (!params.isEmpty()) {
             queryString.append(" WHERE ");
             List<String> conditions = new ArrayList<>();
-            for (Map.Entry<String, Object> param : params.entrySet()) {
+            Iterator<Map.Entry<String, Object>> iterator = params.entrySet().iterator();
+            while (iterator.hasNext()) {
+                Map.Entry<String, Object> param = iterator.next();
                 switch (param.getKey()) {
                     case "id":
                         conditions.add("m.id = :id");
@@ -51,9 +51,7 @@ public class MemberDAOImpl implements MemberDAO {
                                     "(SELECT 1 FROM MemberMark mm " +
                                     "WHERE mm.member = m AND mm.date = current_date())");
                         }
-
-
-                        params.remove(param.getKey());
+                        iterator.remove(); // Используем метод remove() у итератора
                         break;
                 }
             }
