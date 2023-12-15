@@ -13,7 +13,10 @@
     m.id AS member_id,
     m.name AS member_name,
     m.group_id AS member_group,
-    GROUP_CONCAT(CONCAT(a.subject, ' - ', a.took_time)) AS activities
+    (SELECT GROUP_CONCAT(CONCAT(a.subject, ' - ', a.took_time) SEPARATOR '\n')
+         FROM project.activities a
+         WHERE m.id = a.member_id
+           AND DATE(a.date) = CURRENT_DATE) AS activities
 FROM
     project.members m
 JOIN
@@ -96,12 +99,14 @@ ORDER BY
 					</reportElement>
 					<textFieldExpression><![CDATA[$F{member_name}]]></textFieldExpression>
 				</textField>
-				<textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 					<reportElement style="Detail" x="352" y="0" width="352" height="15" uuid="2be530cd-74a0-4dc6-ac4f-5ad3d4b34825">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3ea6cf8c-a7d9-4a60-a23e-028954990c59"/>
 					</reportElement>
+					<textElement markup="styled"/>
 					<textFieldExpression><![CDATA[$F{activities}]]></textFieldExpression>
 				</textField>
+
 			</frame>
 			<line>
 				<reportElement positionType="FixRelativeToBottom" x="97" y="16" width="705" height="1" uuid="e5f21b91-7f24-498e-97a1-0e93db9225a4"/>
