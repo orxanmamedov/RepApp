@@ -23,21 +23,49 @@ public class MemberMarkDAOImpl implements MemberMarkDAO {
     public List<MemberMarkResponseDTO> getListOfMemberMarks(Map<String, String[]> params) {
         return Collections.emptyList();
     }
-
+//
+//    @Override
+//    public void saveMemberMark(MemberMarkRequestDTO memberMarkDTO, int memberId) {
+//        try (Session session = factory.getCurrentSession()) {
+//            session.beginTransaction();
+//            Member member = session.get(Member.class, memberId);
+//            MemberMark memberMark = MemberMarkMapper.fromRequestDTO(memberMarkDTO, member);
+//            memberMark.setDate(LocalDate.now());
+//            session.saveOrUpdate(memberMark);
+//            session.getTransaction().commit();
+//        } catch (HibernateException e) {
+//            throw new CustomApplicationException("Error saving/updating member mark", e);
+//        }
+//    }
     @Override
     public void saveMemberMark(MemberMarkRequestDTO memberMarkDTO, int memberId) {
         try (Session session = factory.getCurrentSession()) {
-            session.beginTransaction();
-            Member member = session.get(Member.class, memberId);
-            MemberMark memberMark = MemberMarkMapper.fromRequestDTO(memberMarkDTO, member);
-            memberMark.setDate(LocalDate.now());
-            session.saveOrUpdate(memberMark);
-            session.getTransaction().commit();
-        } catch (HibernateException e) {
-            throw new CustomApplicationException("Error saving/updating member mark", e);
+            try {
+                session.beginTransaction();
+                Member member = session.get(Member.class, memberId);
+                MemberMark memberMark = MemberMarkMapper.fromRequestDTO(memberMarkDTO, member);
+                MemberMark existingMark = (MemberMark) session.
+                        createQuery("FROM MemberMark WHERE member_id = :memberId AND date = :markDate")
+                        .setParameter("memberId", member.getId())
+                        .setParameter("markDate", memberMark.getDate())
+                        .uniqueResult();
+
+                if (existingMark != null) {
+                    existingMark.setMark(existingMark.getMark() + memberMark.getMark());
+                    session.merge(existingMark);
+                } else {
+                    session.saveOrUpdate(memberMark);
+                }
+
+                session.getTransaction().commit();
+            } catch (HibernateException e) {
+                if (session.getTransaction() != null && session.getTransaction().isActive()) {
+                    session.getTransaction().rollback();
+                }
+                throw new CustomApplicationException("Error saving/updating member mark", e);
+            }
         }
     }
-
 
     @Override
     public MemberMarkResponseDTO getMemberMarkById(int id) {
