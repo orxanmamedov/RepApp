@@ -45,7 +45,7 @@ public class MemberMarkDAOImpl implements MemberMarkDAO {
                 Member member = session.get(Member.class, memberId);
                 MemberMark memberMark = MemberMarkMapper.fromRequestDTO(memberMarkDTO, member);
                 MemberMark existingMark = (MemberMark) session.
-                        createQuery("FROM MemberMark WHERE member = :memberId AND date = :markDate")
+                        createQuery("FROM MemberMark WHERE member_id = :memberId AND date = :markDate")
                         .setParameter("memberId", member.getId())
                         .setParameter("markDate", memberMark.getDate())
                         .uniqueResult();
