@@ -23,7 +23,6 @@ public class MemberMarkDAOImpl implements MemberMarkDAO {
     public List<MemberMarkResponseDTO> getListOfMemberMarks(Map<String, String[]> params) {
         return Collections.emptyList();
     }
-//
 //    @Override
 //    public void saveMemberMark(MemberMarkRequestDTO memberMarkDTO, int memberId) {
 //        try (Session session = factory.getCurrentSession()) {
@@ -43,17 +42,20 @@ public class MemberMarkDAOImpl implements MemberMarkDAO {
             try {
                 session.beginTransaction();
                 Member member = session.get(Member.class, memberId);
-                MemberMark memberMark = MemberMarkMapper.fromRequestDTO(memberMarkDTO, member);
+                LocalDate currentDate = LocalDate.now();
                 MemberMark existingMark = (MemberMark) session.
                         createQuery("FROM MemberMark WHERE member_id = :memberId AND date = :markDate")
                         .setParameter("memberId", member.getId())
-                        .setParameter("markDate", memberMark.getDate())
+                        .setParameter("markDate", currentDate)
                         .uniqueResult();
 
                 if (existingMark != null) {
-                    existingMark.setMark(existingMark.getMark() + memberMark.getMark());
-                    session.merge(existingMark);
+                    throw new CustomApplicationException("A mark already exists for the member on the current date");
+//                    existingMark.setMark(existingMark.getMark() + memberMark.getMark());
+//                    session.merge(existingMark);
                 } else {
+                    MemberMark memberMark = MemberMarkMapper.fromRequestDTO(memberMarkDTO, member);
+                    memberMark.setDate(currentDate);
                     session.saveOrUpdate(memberMark);
                 }
 
