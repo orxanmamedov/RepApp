@@ -1,6 +1,7 @@
 package com.green.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -27,6 +28,7 @@ public class Member {
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "member", fetch = FetchType.EAGER, orphanRemoval = true)
     @JsonManagedReference
+    @BatchSize(size = 25)
     private Set<Activity> activities;
 
     @ManyToOne
@@ -35,6 +37,7 @@ public class Member {
 
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "member", fetch = FetchType.EAGER, orphanRemoval = true)
+    @BatchSize(size = 25)
     private Set<MemberMark> memberMarks;
 
 
