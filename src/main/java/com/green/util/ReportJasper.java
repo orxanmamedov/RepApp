@@ -24,6 +24,9 @@ public class ReportJasper {
 
         String Path = "report.jrxml";
         URL reportPath = ReportJasper.class.getClassLoader().getResource(jrxmlName);
+        if (reportPath == null) {
+            throw new RuntimeException("JRXML file not found: " + jrxmlName);
+        }
 
 //        URL exportPath = ReportJasper.class.getClassLoader().getResource("reportGreen.pdf");
 

@@ -21,6 +21,6 @@ public class Listener implements ServletContextListener {
     @Override
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
 
-
+        TaskToRun.shutdownScheduler();
     }
 }
