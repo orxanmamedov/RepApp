@@ -9,11 +9,11 @@ import javax.servlet.annotation.WebListener;
 
 @WebListener
 public class Listener implements ServletContextListener {
-
+    TaskToRun taskToRun = new TaskToRun();
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         // This method will be called when the servlet context is initialized
-        TaskToRun taskToRun = new TaskToRun();
+
         taskToRun.runTheTaskAtScheduledTime(18, 00, 0);
     }
 
@@ -21,6 +21,6 @@ public class Listener implements ServletContextListener {
     @Override
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
 
-        TaskToRun.shutdownScheduler();
+        taskToRun.shutdownScheduler();
     }
 }

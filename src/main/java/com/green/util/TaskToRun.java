@@ -31,7 +31,7 @@ public class TaskToRun {
         System.out.println("SCHEDULED TIME ---------- " + calculateInitialDelay(hour, minute, second)/(60*1000) + " Minutes");
     }
 
-    public static void shutdownScheduler() {
+    public void shutdownScheduler() {
         scheduler.shutdown();
     }
 
