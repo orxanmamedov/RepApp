@@ -34,7 +34,8 @@ public class JavaMailer {
         ReportJasper reportJasper = new ReportJasper();
 
         try {
-            reportJasper.report();
+            reportJasper.report("report.jrxml", "reportGreen.pdf");
+            reportJasper.report("report2.jrxml", "reportBlue.pdf");
         } catch (URISyntaxException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
@@ -71,20 +72,29 @@ public class JavaMailer {
             message.setText(mes);
             MimeMultipart multipart = new MimeMultipart();
 
-            MimeBodyPart attachment = new MimeBodyPart();
+            MimeBodyPart attachment1 = new MimeBodyPart();
+            MimeBodyPart attachment2 = new MimeBodyPart();
 
-            String exportFileName = "reportGreen.pdf";
-            URL exportPath = JavaMailer.class.getClassLoader().getResource(exportFileName);
-            if (exportPath == null) {
-                throw new RuntimeException("Resource not found: " + exportFileName);
+            String exportFileName1 = "reportGreen.pdf";
+            String exportFileName2 = "reportBlue.pdf";
+            URL exportPath1 = JavaMailer.class.getClassLoader().getResource(exportFileName1);
+            if (exportPath1 == null) {
+                throw new RuntimeException("Resource not found: " + exportFileName1);
             }
-            attachment.attachFile(new File(Objects.requireNonNull((exportPath.toURI()))));
+            attachment1.attachFile(new File(Objects.requireNonNull((exportPath1.toURI()))));
+
+            URL exportPath2 = JavaMailer.class.getClassLoader().getResource(exportFileName2);
+            if (exportPath2 == null) {
+                throw new RuntimeException("Resource not found: " + exportFileName2);
+            }
+            attachment2.attachFile(new File(Objects.requireNonNull((exportPath2.toURI()))));
 
 
             MimeBodyPart messageBodyPart = new MimeBodyPart();
             messageBodyPart.setContent("<h1 style=\"color:green;\">Green Group Daily Report</h1>", "text/html");
 
-            multipart.addBodyPart(attachment);
+            multipart.addBodyPart(attachment1);
+            multipart.addBodyPart(attachment2);
             multipart.addBodyPart(messageBodyPart);
             message.setContent(multipart);
 

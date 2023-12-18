@@ -9,5 +9,6 @@ public class test {
 
         javaMailer.sendMail("Daily Report", "");
 
+
     }
 }
